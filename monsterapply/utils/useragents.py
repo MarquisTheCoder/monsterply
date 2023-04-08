@@ -11,19 +11,19 @@ def get_user_agent(operating_system: str = 'mac') -> str:
 
     software_names: List[Dict]= [SoftwareName.CHROME.value]
 
-    operating_system: List[Dict] = [OperatingSystem.MAC.value]   
+    operating_systems: List[Dict] = [OperatingSystem.MAC.value]   
 
     match operating_system.lower():
 
         case 'windows': 
-            operating_system = [OperatingSystem.WINDOWS.value]
+            operating_systems = [OperatingSystem.WINDOWS.value]
         case 'linux':
-            operating_system = [OperatingSystem.LINUX.value]
+            operating_systems = [OperatingSystem.LINUX.value]
         case 'unix':
-            operating_system = [OperatingSystem.UNIX.value]
+            operating_systems = [OperatingSystem.UNIX.value]
 
     user_agent_rotator: UserAgent = UserAgent(software_names=software_names, 
-                                              operating_systems=operating_system, 
+                                              operating_systems=operating_systems, 
                                               limit=15)
     
     return user_agent_rotator.get_random_user_agent()
