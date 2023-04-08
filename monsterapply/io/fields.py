@@ -14,7 +14,7 @@ from time import sleep
 from random import choice
 from math import floor
 
-def calculate_type_speed(wpm: int):
+def _calculate_type_speed(wpm: int):
     return floor(choice([300, 400, 400, 500,600]) * 10 / wpm) 
 
 def send(message: str, into: XPATH, driver: WebDriver) -> None:
@@ -24,7 +24,7 @@ def send(message: str, into: XPATH, driver: WebDriver) -> None:
 
         for character in message:
             field.send_keys(character)
-            calculate_type_speed(90)
+            _calculate_type_speed(90)
 
         field.send_keys(Keys.ENTER)
         
