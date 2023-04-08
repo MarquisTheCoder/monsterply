@@ -22,6 +22,6 @@ def get_user_agent(operating_system = 'mac'):
 
     user_agent_rotator = UserAgent(software_names=software_names, 
                                 operating_systems=operating_system, 
-                                limit=100)
+                                limit=15)
     
-    return user_agent_rotator.get_user_agents()
+    return user_agent_rotator.get_random_user_agent()
