@@ -1,3 +1,5 @@
+
+
 class BaseMonsterException(Exception):
     """Base exception for all Monster exceptions."""
 
