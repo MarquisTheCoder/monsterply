@@ -1,5 +1,7 @@
 
-from ...types import XPATH 
+import sys
+sys.path.append('../..')
+from ..types import XPATH 
 
 class HomePaths:
     home: XPATH = '/html/body/div[1]/div[1]/header/div[4]/div/div[2]/a'
