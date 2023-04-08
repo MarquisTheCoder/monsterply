@@ -1,13 +1,5 @@
 
-import sys
-import os
-
-current = os.path.dirname(os.path.realpath(__file__))
-parent_directory = os.path.dirname(current)
-  
-sys.path.append(parent_directory)
-
-from types import XPATH 
+from ....monsterapply.types import XPATH
 
 class HomePaths:
     home: XPATH = '/html/body/div[1]/div[1]/header/div[4]/div/div[2]/a'
