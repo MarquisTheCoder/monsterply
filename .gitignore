@@ -6,22 +6,13 @@ __pycache__/
 *.so
 
 # Packages
-*.egg
-*.egg-info
 dist
 build
-docs/_build
-docs/locales.rst
-docs/locales/*.rst
-docs/providers.rst
-docs/providers/*.rst
 eggs
 .eggs
 parts
 var
 sdist
-develop-eggs
-.installed.cfg
 lib
 lib64
 
@@ -33,18 +24,8 @@ pip-log.txt
 .tox
 nosetests.xml
 
-# Translations
-*.mo
+venv/
 
-# Mr Developer
-.mr.developer.cfg
-.project
-.pydevproject
-.python-version
-.idea
-.projectile
-.ropeproject
-.DS_Store
 .venv
 ./venv
 ./monster_venv
