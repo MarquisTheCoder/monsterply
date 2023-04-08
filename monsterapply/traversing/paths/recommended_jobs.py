@@ -1,6 +1,12 @@
 
 import sys
-sys.path.append('..')
+import os
+
+current = os.path.dirname(os.path.realpath(__file__))
+parent_directory = os.path.dirname(current)
+  
+sys.path.append(parent_directory)
+
 from types import XPATH 
 
 class RecommendedPaths:
