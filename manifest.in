@@ -1,0 +1,5 @@
+
+#syntax
+#include <folder>/<asset>
+#example 
+#include sprites/*.png
