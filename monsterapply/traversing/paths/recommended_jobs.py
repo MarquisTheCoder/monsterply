@@ -1,5 +1,5 @@
 
-from ...monster_types import XPATH
+from .. import XPATH
 
 class RecommendedPaths:
     home: XPATH = '/html/body/div[1]/header/div[3]/div/div[2]/a'
