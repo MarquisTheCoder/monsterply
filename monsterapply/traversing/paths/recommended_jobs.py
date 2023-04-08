@@ -1,7 +1,7 @@
 
 import sys
-sys.path.append('../..')
-from ..types import XPATH 
+sys.path.append('../../..')
+from ... types import XPATH 
 
 class RecommendedPaths:
     home: XPATH = '/html/body/div[1]/header/div[3]/div/div[2]/a'
