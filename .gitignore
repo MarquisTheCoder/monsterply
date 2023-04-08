@@ -46,8 +46,8 @@ nosetests.xml
 .ropeproject
 .DS_Store
 .venv
-.monster_venv
-
+./monster_venv
+monster_venv
 # IDE
 *.sw[po]
 *.iml
