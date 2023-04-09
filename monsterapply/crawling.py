@@ -1,8 +1,8 @@
 
 
-from .io import wait
-from .io import fields
-from .io import actions
+from .io.wait import wait
+from .io.fields import fields
+from .io.actions import *
 
 from time import sleep
 from datetime import datetime
@@ -53,7 +53,7 @@ class Crawling:
         try:
 
             login_button: WebElement = wait(HomePaths.login_button, self.driver)
-            actions.move_pointer_to_element(self.driver, login_button)
+            move_pointer_to_element(self.driver, login_button)
             login_button.click()
             sleep(5000)
             
