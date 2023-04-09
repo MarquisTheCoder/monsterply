@@ -1,8 +1,8 @@
 
 
 from mio.actions import *
-from mio.fields import send
-from mio.wait import wait
+import mio.fields
+import mio.wait
 
 from time import sleep
 from datetime import datetime
