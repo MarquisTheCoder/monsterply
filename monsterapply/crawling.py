@@ -40,7 +40,6 @@ class Crawling:
         self.run_until: datetime = run_until
         self.driver: WebDriver = new_driver()
 
-        self.crawl()
 
     def crawl(self):
         self.goto_home()
