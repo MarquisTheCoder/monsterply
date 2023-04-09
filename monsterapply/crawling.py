@@ -1,8 +1,6 @@
 
 
-from .mio.wait import wait
-from .mio.fields import fields
-from .mio.actions import *
+from mio import *
 
 from time import sleep
 from datetime import datetime
