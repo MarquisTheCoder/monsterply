@@ -5,7 +5,8 @@ from random import choice
 from time import sleep
 from math import floor
 
-from wait import wait
+from ..mio.wait import *
+
 from ..traversing.paths.types import XPATH
 
 from typing import Boolean 

@@ -4,7 +4,7 @@ from traversing.paths.home import HomePaths
 from utils.useragents import get_user_agent
 from cli import file
 
-from crawling import Crawling
+import crawling
 
 def main() -> None:
     print(f'homepage -> home button = {HomePaths.home}')
@@ -12,7 +12,7 @@ def main() -> None:
     print(get_user_agent())
     file()
 
-    crawler: Crawling = Crawling()
+    crawler: crawling.Crawler = crawling.Crawler()
     crawler.crawl()
     
 if __name__ == '__main__':
