@@ -1,7 +1,11 @@
 
 
-class BaseMonsterException(Exception):
-    """Base exception for all Monster exceptions."""
+from typing import Callable
+from selenium.common.exceptions import NoSuchElementException
 
-class TimeOutException(BaseMonsterException):
-    """If bot has been running too long and the session times out."""
+
+def raises_not_found(action: Callable(...)) -> None:
+    try:
+        action()
+    except NoSuchElementException(Exception):
+        print(Exception.with_traceback)

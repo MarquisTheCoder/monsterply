@@ -17,6 +17,7 @@ Options:
   --hours     INT       time you want to spend scraping
   --run-until DATE      run until this date
   --run-on    DATE      run on this date
+  --location
   --help      NONE      Show this message and exit.
 
 
