@@ -4,7 +4,6 @@ from ..traversing.paths.types import XPATH
 
 from ...monsterapply.exceptions import BaseMonsterException
 
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
