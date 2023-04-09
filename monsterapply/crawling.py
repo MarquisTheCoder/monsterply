@@ -1,6 +1,8 @@
 
 
-from mio import *
+from mio.actions import *
+from mio.fields import send
+from mio.wait import wait
 
 from time import sleep
 from datetime import datetime
@@ -61,7 +63,7 @@ class Crawling:
     @raises_not_found
     def search_job(self, job: str):
         search_bar: WebElement = wait(HomePaths.search_bar)
-        fields.send(job, into=search_bar, driver=self.driver)
+        send(job, into=search_bar, driver=self.driver)
 
 
 
