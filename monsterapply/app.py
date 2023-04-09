@@ -13,7 +13,6 @@ def main() -> None:
     # file()
     factory: Factory = Factory()
     factory.create_bot()
-
-
+    
 if __name__ == '__main__':
     main()

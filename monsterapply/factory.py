@@ -8,7 +8,7 @@ from driver import new_driver
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.remote.webdriver import WebDriver
 
-"""Will create bots here"""
+""" Handles the aysynchronous bot operations."""
 
 class Factory:
 
@@ -25,6 +25,3 @@ class Factory:
         self.hours: int = hours
         self.file: TextIO = file
         self.driver: WebDriver = new_driver()
-
-    def create_bot(self):
-        self.driver.get(Factory.base_url)
