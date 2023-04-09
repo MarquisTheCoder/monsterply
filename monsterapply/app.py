@@ -12,7 +12,6 @@ def main() -> None:
     # print(get_user_agent())
     # file()
     factory: Factory = Factory()
-    factory.create_bot()
     
 if __name__ == '__main__':
     main()

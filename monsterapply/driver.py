@@ -18,6 +18,6 @@ chrome_options.add_argument("--disable-blink-features=AutomationControlled")
 chrome_options.add_argument(f'user-agent={get_user_agent()}')
 
 def new_driver() -> WebDriver:
-    chrome: WebDriver = uc2.Chrome(version_main=111, chrome_options=chrome_options)
-    chrome.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})") 
-    return chrome
+    with uc2.Chrome(version_main=111, chrome_options=chrome_options) as chrome:
+        chrome.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})") 
+        return chrome
