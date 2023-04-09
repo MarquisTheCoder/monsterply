@@ -22,7 +22,6 @@ Options:
 
 """
 
-
 @click.command()
 @click.option('--file', 
               help='Input file for the bot to read form.', 
@@ -44,5 +43,5 @@ def hours():
 def run_until():
     pass
 
-def run_on():
+def run_at():
     pass
