@@ -11,13 +11,13 @@ from driver import new_driver
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.remote.webdriver import WebDriver
 
-from .traversing.paths.types import XPATH
-from .traversing.paths.home import HomePaths
-from .traversing.paths.recommended_jobs import RecommendedPaths
+from traversing.paths.types import XPATH
+from traversing.paths.home import HomePaths
+from traversing.paths.recommended_jobs import RecommendedPaths
 
 """Handles exception handling"""
 
-from .exceptions import *
+from exceptions import *
 
 
 base_url: str = "https://www.monster.com/"
