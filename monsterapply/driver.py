@@ -9,11 +9,16 @@ from selenium.webdriver.remote.webdriver import WebDriver
 
 from utils.useragents import get_user_agent
 
+import pickle
+
 def new_driver() -> WebDriver:
 
     """Editing chrome options to avoid detection"""
+
     chrome_options: Options = Options()
+
     
+        
     chrome_options.add_experimental_option("detach", True)
     chrome_options.add_experimental_option("useAutomationExtension", False) 
     chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])  
@@ -23,4 +28,10 @@ def new_driver() -> WebDriver:
 
     chrome: WebDriver = uc2.Chrome(version_main=111, chrome_options=chrome_options)
     chrome.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})") 
+
+    cookies = pickle.load(open("cookies/cookies.pkl", "rb"))
+
+    for cookie in cookies:
+        chrome.add_cookie(cookie)
+
     return chrome
