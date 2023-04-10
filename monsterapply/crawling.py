@@ -134,6 +134,7 @@ class Crawler():
 
         for apply_button in apply_buttons:
             if 'quick' in apply_button.text:
+                print(apply_button.text)
                 self.apply_for_job(apply_button)
 
 
