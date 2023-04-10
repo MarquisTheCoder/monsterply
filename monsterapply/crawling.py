@@ -57,7 +57,7 @@ class Crawler():
     def crawl(self) -> None:
         self.goto_home()
         self.bypass_google_login()
-        self.search_job("Entry Web Developer", "Texas")
+        self.search_job("Junior Java Developer", "New York")
         self.load_jobs()
 
     def goto_home(self) -> None:
@@ -71,32 +71,12 @@ class Crawler():
         login_button.click()
         
     def bypass_google_login(self) -> None:
-        
-        # square_settings = "/html/body/div[1]/div[1]/div/div/div/div[2]/div/div/div/a"
-        # goto_account = '/html/body/div/c-wiz/div/div/c-wiz/div/div/div[2]/div[2]/div[1]/ul/li[1]'
-        # sign_in = "/html/body/div[1]/div[1]/div/div/div/div[2]/a"
- 
+         
         original_window = self.driver.current_window_handle
         self.driver.switch_to.new_window('tab')
         self.driver.get(google)
 
-        # wait(square_settings, self.driver).click()
-        # sleep(1)
-        # wait(goto_account, self.driver).click()
-  
-        # sleep(1 + uniform(0,1))
-
-        # email: WebElement = wait(Login.google.email, self.driver)
-        # move_pointer_to_element(email, self.driver)
-        # send('deshawn.m.williams01@gmail.com', email, self.driver)
-
-        # sleep(1 + uniform(0,1))
-        
-        # password: WebElement = wait(Login.google.password, self.driver)
-        # move_pointer_to_element(password, self.driver)
-        # send('Ciddate0!', password, self.driver)
-        
-
+    
         signed_in: WebElement = wait(Login.google.signed_in, 
                                          driver=self.driver,
                                          timeout=100)
@@ -133,7 +113,7 @@ class Crawler():
             return False
         return True
 
-    def load_jobs(self) -> None: 
+    def load_jobs(self, current_page: int = 1) -> None: 
 
         hold: WebDriverWait = WebDriverWait(self.driver, 10000)
         hold.until(ec.presence_of_element_located((By.CLASS_NAME,"apply-buttonstyle__JobApplyButton-sc-1xcccr3-0")))
@@ -149,10 +129,10 @@ class Crawler():
                 print(apply_button.text)
                 self.apply_for_job(apply_button)
         
-        if self.check_page(self.driver.current_url, self.current_page + 1):
-            self.current_page = self.current_page + 1
-            self.driver.get(f'{self.url_handling(self.driver.current_url)}&page={self.current_page}')
-            self.load_jobs()
+        if self.check_page(self.driver.current_url, current_page + 1):
+            current_page = current_page + 1
+            self.driver.get(f'{self.url_handling(self.driver.current_url)}&page={current_page}')
+            self.load_jobs(current_page)
 
     def apply_for_job(self, button: WebElement) -> None:
         button.click()
