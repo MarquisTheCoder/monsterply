@@ -12,14 +12,6 @@ def _calculate_type_speed(wpm: int) -> None:
     sleep(delay)
 
 
-def _simulate_typing_error(into: WebElement, message: str, i: int) -> None:
-    """Simulate a typing error by backspacing and retyping the previous character."""
-    sleep(uniform(0.1, 0.3))
-    into.send_keys(Keys.BACKSPACE)
-    sleep(uniform(0.1, 0.3))
-    into.send_keys(message[i-1])
-
-
 def send(message: str, into: WebElement, driver: WebDriver, wpm: int = 60) -> None:
     """Type a message into an input field."""
     try:
@@ -47,3 +39,12 @@ def send(message: str, into: WebElement, driver: WebDriver, wpm: int = 60) -> No
 
     except Exception:
         pass
+
+
+def _simulate_typing_error(into: WebElement, message: str, i: int) -> None:
+    """Simulate a typing error by backspacing and retyping the previous character."""
+    sleep(uniform(0.1, 0.3))
+    into.send_keys(Keys.BACKSPACE)
+    sleep(uniform(0.1, 0.3))
+    into.send_keys(message[i-1])
+    _calculate_type_speed(2 * wpm) 
