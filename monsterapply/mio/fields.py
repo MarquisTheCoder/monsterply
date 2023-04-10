@@ -12,9 +12,10 @@ def _calculate_type_speed(wpm: int) -> None:
     sleep(delay)
 
 
-def send(message: str, into: WebElement, driver: WebDriver, wpm: int = 800) -> None:
+def send(message: str, into: WebElement, driver: WebDriver, wpm: int = 20) -> None:
     """Type a message into an input field."""
     try:
+
         for i in range(len(message)):
             character = message[i]
             into.send_keys(character)
@@ -39,6 +40,7 @@ def send(message: str, into: WebElement, driver: WebDriver, wpm: int = 800) -> N
                 for j in range(backspace_count):
                     into.send_keys(Keys.BACKSPACE)
                     _calculate_type_speed(wpm)
+
                 # Type out the saved characters again
                 for j in to_backspace[::-1]:
                     into.send_keys(j)
