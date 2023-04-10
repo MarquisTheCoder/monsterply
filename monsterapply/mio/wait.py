@@ -1,6 +1,5 @@
 
 
-from monsterapply.traversing.paths.types import XPATH
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
@@ -14,7 +13,7 @@ from selenium.common.exceptions import NoSuchElementException
 def mili_to_seconds(mili: int) -> int:
     return mili * 1_000
 
-def wait(to_find: XPATH, driver: WebDriver,timeout: int = mili_to_seconds(5)):
+def wait(to_find: str, driver: WebDriver,timeout: int = mili_to_seconds(5)):
 
     wait: WebDriverWait = WebDriverWait(driver, timeout)
 
