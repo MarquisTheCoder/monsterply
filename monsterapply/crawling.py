@@ -61,14 +61,12 @@ class Crawler():
         self.driver.get(base_url)
     
     def open_login_page(self) -> None:
-        try:
 
-            login_button: WebElement = wait(HomePaths.login_button, self.driver)
-            move_pointer_to_element(login_button, self.driver)
-            login_button.click()
+        login_button: WebElement = wait(HomePaths.login_button, self.driver)
+        move_pointer_to_element(login_button, self.driver)
+        login_button.click()
 
-        except Exception:
-            """logged in already"""
+        """logged in already"""
 
     def bypass_login(self, email: str, password: str) -> None:
 
