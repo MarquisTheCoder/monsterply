@@ -29,9 +29,9 @@ def new_driver() -> WebDriver:
     chrome: WebDriver = uc2.Chrome(version_main=111, chrome_options=chrome_options)
     chrome.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})") 
 
-    cookies = pickle.load(open("cookies/cookies.pkl", "rb"))
+    # cookies = pickle.load(open("cookies/cookies.pkl", "rb"))
 
-    for cookie in cookies:
-        chrome.add_cookie(cookie)
+    # for cookie in cookies:
+    #     chrome.add_cookie(cookie)
 
     return chrome

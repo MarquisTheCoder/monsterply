@@ -18,6 +18,7 @@ driver: WebDriver = new_driver()
 def start_driver():
     driver.get("https://google.com")
     wait(HomePaths.home, driver=driver, timeout=100000)
+    sleep(1)
     pickle.dump(driver.get_cookies(), open("cookies/cookies.pkl", "wb"))
 
 start_driver()
