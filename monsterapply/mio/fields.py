@@ -13,9 +13,9 @@ def _calculate_type_speed(wpm: int) -> None:
 
 
 def send(message: str, into: WebElement, driver: WebDriver, wpm: int = 90) -> None:
+
     """Type a message into an input field."""
     try:
-
         for i in range(len(message)):
             character = message[i]
             into.send_keys(character)
@@ -51,7 +51,6 @@ def send(message: str, into: WebElement, driver: WebDriver, wpm: int = 90) -> No
 
     except Exception:
         pass
-
 
 def _simulate_typing_error(into: WebElement, message: str, i: int, wpm: int = 90) -> None:
     """Simulate a typing error by backspacing and retyping the previous character."""
