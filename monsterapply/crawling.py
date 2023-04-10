@@ -51,14 +51,13 @@ class Crawler():
         self.jobs_raw: List[str] = jobs_raw
         self.run_until: datetime = run_until
         self.driver: WebDriver = driver
-        self.current_page = current_page 
-    
+        self.current_page = current_page  
 
     def crawl(self) -> None:
         self.goto_home()
         self.bypass_google_login()
-        self.search_job("Software Developer", "wyoming")
-        self.load_jobs("Developer", "wyoming")
+        self.search_job("Software Developer", "California")
+        self.load_jobs("Software Developer", "California")
 
     def goto_home(self) -> None:
         self.driver.get(base_url)
