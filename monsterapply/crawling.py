@@ -50,27 +50,27 @@ class Crawler():
         self.driver: WebDriver = driver 
 
 
-    def crawl(self):
+    def crawl(self) -> None:
         self.goto_home()
         self.open_login_page()
         
         self.bypass_login('deshawn.m.williams01@gmail.com', 'Ciddate0!')
         self.search_job("Python Developer")
 
-    def goto_home(self):
+    def goto_home(self) -> None:
         self.driver.get(base_url)
     
-    def open_login_page(self):
+    def open_login_page(self) -> None:
         try:
 
             login_button: WebElement = wait(HomePaths.login_button, self.driver)
             move_pointer_to_element(login_button, self.driver)
             login_button.click()
-            
+
         except Exception:
             """logged in already"""
 
-    def bypass_login(self, email: str, password: str):
+    def bypass_login(self, email: str, password: str) -> None:
 
         login_with_google: WebElement = wait(Login.google_login, self.driver)
         move_pointer_to_element(login_with_google, self.driver)
@@ -101,7 +101,7 @@ class Crawler():
         google_login_password_next.click()
  
     # @raises_not_found
-    def search_job(self, job: str):
+    def search_job(self, job: str) -> None:
         search_bar: WebElement = wait(HomePaths.search_bar,self.driver, timeout=180)
         send(job, into=search_bar, driver=self.driver)
 
