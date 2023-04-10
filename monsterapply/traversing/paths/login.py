@@ -12,3 +12,4 @@ class Login:
         next_email: XPATH = '/html/body/div[1]/div[1]/div[2]/div/c-wiz/div/div[2]/div/div[2]/div/div[1]/div/div/button' 
         password: XPATH = '/html/body/div[1]/div[1]/div[2]/div/c-wiz/div/div[2]/div/div[1]/div/form/span/section[2]/div/div/div[1]/div[1]/div/div/div/div/div[1]/div/div[1]/input'
         next_password: XPATH = '/html/body/div[1]/div[1]/div[2]/div/c-wiz/div/div[2]/div/div[2]/div/div[1]/div/div/button'
+        signed_in: XPATH = '/html/body/div[3]/header/div[2]/div[1]/div[4]/div/a'
