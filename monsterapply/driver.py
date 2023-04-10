@@ -34,11 +34,11 @@ def new_driver() -> WebDriver:
     if (current_system == 'darwin'):
         chrome_options.add_argument(f'user-data-dir=/Users/{getlogin()}/Library/Application Support/Google/Chrome/Default')
 
-    elif (current_system == 'windows'):
-        chrome_options.add_argument(f'user-data-dir=C:\Users\{getlogin()}\AppData\Local\Google\Chrome\User Data\Default')
+    # elif (current_system == 'windows'):
+    #     chrome_options.add_argument(f'user-data-dir=C:\Users\{getlogin()}\AppData\Local\Google\Chrome\User Data\Default')
 
-    else:
-        chrome_options.add_argument(f'user-data-dir=/home/{getlogin()}/. config/google-chrome/default')
+    # else:
+    #     chrome_options.add_argument(f'user-data-dir=/home/{getlogin()}/. config/google-chrome/default')
 
     # cookies = pickle.load(open("cookies/cookies.pkl", "rb"))
 
