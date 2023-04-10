@@ -100,7 +100,7 @@ class Crawler():
 
     def url_handling(self, url, next_page):
         x = url.split('&')
-        for i in range(len(x)):
+        for i in range(len(x) -1):
             if 'page' in x[i]:
                 x.pop(i)
         return "&".join(x) + '&page=' + next_page
