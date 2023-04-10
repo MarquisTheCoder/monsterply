@@ -128,16 +128,18 @@ class Crawler():
     def load_jobs(self) -> None: 
 
         hold: WebDriverWait = WebDriverWait(self.driver, 10000)
+
         hold.until(ec.presence_of_element_located((By.CLASS_NAME,"apply-buttonstyle__JobApplyButton-sc-1xcccr3-0")))
 
         apply_buttons = self.driver.find_elements(By.CLASS_NAME, "apply-buttonstyle__JobApplyButton-sc-1xcccr3-0")
 
         for apply_button in apply_buttons:
+            print(apply_button.text)
             if 'quick' in apply_button.text:
                 print(apply_button.text)
                 self.apply_for_job(apply_button)
 
-
+        sleep(60000)
     def apply_for_job(self, button: WebElement) -> None:
         button.click()
 
