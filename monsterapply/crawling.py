@@ -68,7 +68,7 @@ class Crawler():
     def bypass_google_login(self) -> None:
         
         square_settings = "/html/body/div[1]/div[1]/div/div/div/div[2]/div/div/div/a"
-        goto_account = "/html/body/div/c-wiz/div/div/c-wiz/div/div/div[2]/div[2]/div[1]/ul/li[1]/a"
+        goto_account = '//*[@id="yDmH0d"]/c-wiz/div/div/c-wiz/div/div/div[2]/div[2]/div[1]/ul/li[1]/a'
         sign_in = "/html/body/div[1]/div[1]/div/div/div/div[2]/a"
 
         
@@ -79,6 +79,7 @@ class Crawler():
         self.driver.get(google)
 
         wait(square_settings, self.driver).click()
+        sleep(1)
         wait(goto_account, self.driver).click()
   
         sleep(1 + uniform(0,1))
@@ -93,7 +94,7 @@ class Crawler():
         move_pointer_to_element(password, self.driver)
         send('Ciddate0!', password, self.driver)
         
-        
+
         signed_in: WebElement = wait(Login.google.signed_in, 
                                          driver=self.driver,
                                          timeout=100)
