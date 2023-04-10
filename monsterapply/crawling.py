@@ -81,6 +81,7 @@ class Crawler():
         sleep(1 + uniform(0,1))
         
         password: WebElement = wait(Login.google.password, self.driver)
+        move_pointer_to_element(password, self.driver)
         send('Ciddate0!', password, self.driver)
         
         sleep(1 + uniform(0,1))
