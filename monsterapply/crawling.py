@@ -94,15 +94,19 @@ class Crawler():
     
 
     def search_job(self, job: str, location: str, page: str) -> None:
+
         location = location.replace(' ', '+')
         location = location.replace(',', '%2C')
+
         self.driver.get(self.form_query(job, location, page)) 
        
 
     def search_jobs(self, job: str, location: str, page: int ):
+
         self.search_job(job, location, page)
         self.load_jobs()
         self.apply_for_jobs()
+
         if self.check_page(job, location, page + 1):
             self.search_jobs(job, location, page + 1)
 
@@ -110,6 +114,8 @@ class Crawler():
     def check_page(self, job: str, location: str, page: int) -> bool:
         response = requests.get(self.form_query(job, location, page))
         if 'sorry' in response.text.lower():
+            print('page not found:')
+            print(self.form_query(job, location, page))
             return False
         return True
 
