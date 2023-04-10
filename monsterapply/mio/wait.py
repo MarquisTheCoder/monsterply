@@ -21,5 +21,5 @@ def wait(to_find: str, driver: WebDriver,timeout: int = mili_to_seconds(5)):
         to_find = wait.until(ec.presence_of_element_located(By.XPATH, to_find))
         return to_find
     
-    except NoSuchElementException(Exception):
+    except NoSuchElementException(BaseException):
        print(f"No such element")
