@@ -18,7 +18,6 @@ def new_driver() -> WebDriver:
     chrome_options.add_experimental_option("useAutomationExtension", False) 
     chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])  
 
-    chrome_options.add_argument("user-data-dir=profile") 
     chrome_options.add_argument(f'user-agent={get_user_agent()}')
     chrome_options.add_argument("--disable-blink-features=AutomationControlled") 
 
