@@ -4,6 +4,7 @@ from traversing.paths.home import HomePaths
 from utils.useragents import get_user_agent
 from cli import file
 
+from driver import new_driver
 from crawling import Crawler
 
 def main() -> None:
@@ -12,7 +13,7 @@ def main() -> None:
     print(get_user_agent())
     # file()
 
-    crawler: Crawler = Crawler()
+    crawler: Crawler = Crawler(driver= new_driver())
     crawler.crawl()
     
 if __name__ == '__main__':
