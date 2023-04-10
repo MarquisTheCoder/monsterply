@@ -17,6 +17,10 @@ from traversing.paths.types import XPATH
 from traversing.paths.home import HomePaths
 from traversing.paths.recommended_jobs import RecommendedPaths
 
+
+from mio.wait import wait
+from mio.fields import send
+
 """Handles exception handling"""
 
 from exceptions import *
@@ -65,7 +69,7 @@ class Crawler():
 
     @raises_not_found
     def search_job(self, job: str):
-        search_bar: WebElement = wait(HomePaths.search_bar)
+        search_bar: WebElement = wait(HomePaths.search_bar,self.driver)
         send(job, into=search_bar, driver=self.driver)
 
 
