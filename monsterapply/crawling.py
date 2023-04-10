@@ -107,9 +107,11 @@ class Crawler():
         google_login.click()
 
 
-    def search_job(self, job: str) -> None:
+    def search_job(self, job: str, location: str) -> None:
         search_bar: WebElement = wait(HomePaths.search_bar, self.driver, timeout=180)
         send(job, into=search_bar, driver=self.driver)
+        location_bar: WebElement = wait(HomePaths.location, self.driver)
+        send(location, into=location_bar, driver=self.driver)
 
     def check_page(self, base_url, next_page):
 
