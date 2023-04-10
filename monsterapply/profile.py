@@ -17,6 +17,12 @@ from concurrent.futures import ProcessPoolExecutor
 
 driver: WebDriver = new_driver()
 
+executor = ProcessPoolExecutor(2)
+loop = asyncio.new_event_loop()
+baa = loop.run_in_executor(executor, save_cookies)
+
+loop.run_forever()
+
 def start_driver():
     driver.get("https://google.com")
     wait(HomePaths.home, driver=driver, timeout=100000)
@@ -28,9 +34,3 @@ def save_cookies():
         pickle.dump(driver.get_cookies(), open("cookies/cookies.pkl", "wb"))
 
 start_driver()
-
-executor = ProcessPoolExecutor(2)
-loop = asyncio.new_event_loop()
-baa = loop.run_in_executor(executor, save_cookies)
-
-loop.run_forever()
