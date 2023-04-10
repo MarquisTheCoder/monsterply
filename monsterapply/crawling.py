@@ -54,8 +54,6 @@ class Crawler():
         self.goto_home()
         self.open_login_page()
         sleep(1000000)
-        # self.bypass_login('deshawn.m.williams01@gmail.com', 'Ciddate0!')
-        # self.search_job("Python Developer")
 
     def goto_home(self) -> None:
         self.driver.get(base_url)
