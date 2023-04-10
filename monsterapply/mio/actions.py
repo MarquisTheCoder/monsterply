@@ -38,6 +38,6 @@ def move_pointer_to_element(element: WebElement, driver: WebDriver):
     action = ActionChains(driver)
     
     for mouse_x, mouse_y in zip(x_i, y_i):
-        action.move_to_element_by_offset(element, mouse_x, mouse_y);
+        action.move_to_element_with_offset(element, mouse_x, mouse_y);
         action.perform();
         print(mouse_x, mouse_y)
