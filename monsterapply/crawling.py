@@ -26,7 +26,7 @@ from mio.fields import send
 """Handles exception handling"""
 
 from exceptions import *
-
+import requests
 
 base_url: str = "https://www.monster.com/"
 google: str = "https://google.com"
@@ -48,13 +48,14 @@ class Crawler():
         self.jobs_raw: List[str] = jobs_raw
         self.run_until: datetime = run_until
         self.driver: WebDriver = driver 
-
+        self.current_page = 1
 
     def crawl(self) -> None:
         self.goto_home()
-        # self.open_login_page()
         self.bypass_google_login()
         self.search_job("Entry Web Developer")
+        self.load_jobs()
+
     def goto_home(self) -> None:
         self.driver.get(base_url)
     
@@ -67,12 +68,10 @@ class Crawler():
         
     def bypass_google_login(self) -> None:
         
-        square_settings = "/html/body/div[1]/div[1]/div/div/div/div[2]/div/div/div/a"
-        goto_account = '/html/body/div/c-wiz/div/div/c-wiz/div/div/div[2]/div[2]/div[1]/ul/li[1]'
-        sign_in = "/html/body/div[1]/div[1]/div/div/div/div[2]/a"
-
-        
-
+        # square_settings = "/html/body/div[1]/div[1]/div/div/div/div[2]/div/div/div/a"
+        # goto_account = '/html/body/div/c-wiz/div/div/c-wiz/div/div/div[2]/div[2]/div[1]/ul/li[1]'
+        # sign_in = "/html/body/div[1]/div[1]/div/div/div/div[2]/a"
+ 
         original_window = self.driver.current_window_handle
         self.driver.switch_to.new_window('tab')
         self.driver.get(google)
@@ -111,6 +110,32 @@ class Crawler():
     def search_job(self, job: str) -> None:
         search_bar: WebElement = wait(HomePaths.search_bar, self.driver, timeout=180)
         send(job, into=search_bar, driver=self.driver)
+
+    def check_page(self, base_url, next_page):
+
+        parse_url = base_url.split('&')
+        if 'page' in parse_url[len(parse_url) - 1]:
+            parse_url.pop()
+
+        response = requests.get(f'{parse_url}&page={next_page}')
+        if "Sorry, no jobs found for that search" in response.text:
+            return False
+        return True
+
+    def load_jobs(self) -> None: 
+        apply_buttons = self.driver.find_elements(By.CLASS_NAME, "apply-buttonstyle__JobApplyButton-sc-1xcccr3-0")
+        for apply_button in apply_buttons:
+            if 'quick' in apply_button.text:
+                self.apply_for_job(apply_button)
+
+
+    def apply_for_job(self, button: WebElement) -> None:
+        button.click()
+
+    
+
+
+
 
 
 
