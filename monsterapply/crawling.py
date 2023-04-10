@@ -100,7 +100,7 @@ class Crawler():
 
 
     def search_job(self, job: str) -> None:
-        search_bar: WebElement = wait(HomePaths.search_bar,self.driver, timeout=180)
+        search_bar: WebElement = wait(HomePaths.search_bar, self.driver, timeout=180)
         send(job, into=search_bar, driver=self.driver)
 
 
