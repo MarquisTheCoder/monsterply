@@ -62,7 +62,7 @@ class Crawler():
             login_button: WebElement = wait(HomePaths.login_button, self.driver)
             move_pointer_to_element(self.driver, login_button)
             login_button.click()
-            sleep(5000)
+            sleep(60 * 1.3)
             
         except Exception:
             """logged in already"""
