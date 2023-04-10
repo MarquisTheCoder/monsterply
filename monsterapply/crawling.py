@@ -98,19 +98,19 @@ class Crawler():
         send(location, into=location_bar, driver=self.driver)
         wait(HomePaths.search_button, self.driver).click()
 
-    def url_handling(self, url):
+    def url_handling(self, url, next_page):
         x = url.split('&')
         for i in range(len(x)):
             if 'page' in x[i]:
                 x.remove[i]
-        return "&".join(x) 
+        return "&".join(x) + '&page=' + next_page
 
 
     def check_page(self, base_url, next_page):
 
-        parse_url = self.url_handling(base_url)
+        parse_url = self.url_handling(base_url, next_page)
 
-        response = requests.get(f'{parse_url}')
+        response = requests.get(parse_url)
         if 'sorry' in response.text.lower():
             return False
         return True
