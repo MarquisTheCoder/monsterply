@@ -21,7 +21,7 @@ from traversing.paths.recommended_jobs import RecommendedPaths
 
 from mio.wait import *
 from mio.fields import send
-
+from mio.actions import move_pointer_to_element
 
 """Handles exception handling"""
 
@@ -53,6 +53,7 @@ class Crawler():
     def crawl(self):
         self.goto_home()
         self.open_login_page()
+        
         self.bypass_login('deshawn.m.williams01@gmail.com', 'Ciddate0!')
         self.search_job("Python Developer")
 
@@ -63,7 +64,7 @@ class Crawler():
         try:
 
             login_button: WebElement = wait(HomePaths.login_button, self.driver)
-            move_pointer_to_element(self.driver, login_button)
+            move_pointer_to_element(login_button, self.driver)
             login_button.click()
             
         except Exception:
@@ -72,16 +73,25 @@ class Crawler():
     def bypass_login(self, email: str, password: str):
 
         login_with_google: WebElement = wait(Login.google_login, self.driver)
+        move_pointer_to_element(login_with_google, self.driver)
         login_with_google.click()
+        
+        randomize_pause(1.0, 2.5)
 
         google_login_email: WebElement = wait(Login.google.email, self.driver)
+        move_pointer_to_element(google_login_email, self.driver)
         send(email, into=google_login_email, driver=self.driver)
+        
         google_login_email_next: WebElement = wait(Login.google.next_email, self.driver)
+        move_pointer_to_element(google_login_email_next, self.driver)
         google_login_email_next.click()
 
         google_login_password: WebElement = wait(Login.google.password, self.driver)
+        move_pointer_to_element(google_login_password, self.driver)
         send(password, into=google_login_password, driver=self.driver)
+
         google_login_password_next: WebElement = wait(Login.google.next_password, self.driver)
+        move_pointer_to_element(google_login_email_next, self.driver)
         google_login_password_next.click()
  
     # @raises_not_found

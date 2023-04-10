@@ -26,8 +26,11 @@ def wait(to_find: str, driver: WebDriver,timeout: int = mili_to_seconds(15)):
     # except Exception:
     #    raise NoSuchElementException
 
-def randomize_pause(method, start: float, end: float) -> None:
+def randomize_pause_for(method, start: float, end: float) -> None:
     def page_action(*args, **kwargs):
         sleep(uniform(start,end))
         method(*args, **kwargs)
     return page_action
+
+def randomize_pause(start: float, end: float) -> None:
+    sleep(uniform(start, end))
