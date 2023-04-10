@@ -20,7 +20,7 @@ def send(message: str, into: WebElement, driver: WebDriver, wpm: int = 400) -> N
             into.send_keys(character)
             _calculate_type_speed(wpm)
             if random() < 0.01:  
-                _simulate_typing_error(into, message, i)
+                _simulate_typing_error(into, message, i, wpm)  # pass wpm value to the function
             if random() < 0.02:  
                 pause_length = triangular(0.1, 0.5, 0.3)  
                 sleep(pause_length)
@@ -39,7 +39,6 @@ def send(message: str, into: WebElement, driver: WebDriver, wpm: int = 400) -> N
 
     except Exception:
         pass
-
 
 def _simulate_typing_error(into: WebElement, message: str, i: int, wpm: int = 200) -> None:
     """Simulate a typing error by backspacing and retyping the previous character."""
