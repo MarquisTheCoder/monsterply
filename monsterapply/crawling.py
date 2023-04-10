@@ -53,7 +53,7 @@ class Crawler():
     def crawl(self) -> None:
         self.goto_home()
         # self.open_login_page()
-        self.
+        self.bypass_login()
 
     def goto_home(self) -> None:
         self.driver.get(base_url)
