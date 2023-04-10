@@ -74,25 +74,24 @@ class Crawler():
         
 
         original_window = self.driver.current_window_handle
-
         self.driver.switch_to.new_window('tab')
         self.driver.get(google)
 
-        wait(square_settings, self.driver).click()
-        sleep(1)
-        wait(goto_account, self.driver).click()
+        # wait(square_settings, self.driver).click()
+        # sleep(1)
+        # wait(goto_account, self.driver).click()
   
-        sleep(1 + uniform(0,1))
+        # sleep(1 + uniform(0,1))
 
-        email: WebElement = wait(Login.google.email, self.driver)
-        move_pointer_to_element(email, self.driver)
-        send('deshawn.m.williams01@gmail.com', email, self.driver)
+        # email: WebElement = wait(Login.google.email, self.driver)
+        # move_pointer_to_element(email, self.driver)
+        # send('deshawn.m.williams01@gmail.com', email, self.driver)
 
-        sleep(1 + uniform(0,1))
+        # sleep(1 + uniform(0,1))
         
-        password: WebElement = wait(Login.google.password, self.driver)
-        move_pointer_to_element(password, self.driver)
-        send('Ciddate0!', password, self.driver)
+        # password: WebElement = wait(Login.google.password, self.driver)
+        # move_pointer_to_element(password, self.driver)
+        # send('Ciddate0!', password, self.driver)
         
 
         signed_in: WebElement = wait(Login.google.signed_in, 
@@ -103,7 +102,8 @@ class Crawler():
 
         self.driver.switch_to.window(original_window)
         
-
+        homepage_login: WebElement = wait(HomePaths.login_button, driver=self.driver).click()
+        randomize_pause(2,3)
         google_login: WebElement = wait(Login.google_login, driver=self.driver)
         move_pointer_to_element(google_login, self.driver)
         google_login.click()
