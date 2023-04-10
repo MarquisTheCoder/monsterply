@@ -102,7 +102,7 @@ class Crawler():
         x = url.split('&')
         for i in range(len(x)):
             if 'page' in x[i]:
-                x.remove[i]
+                x.remove(i)
         return "&".join(x) + '&page=' + next_page
 
 
