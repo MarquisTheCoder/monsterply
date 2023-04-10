@@ -27,9 +27,10 @@ def save_cookies():
         sleep(0.5)
         pickle.dump(driver.get_cookies(), open("cookies/cookies.pkl", "wb"))
 
+start_driver()
+
 executor = ProcessPoolExecutor(2)
 loop = asyncio.new_event_loop()
-boo = loop.run_in_executor(executor, start_driver)
 baa = loop.run_in_executor(executor, save_cookies)
 
 loop.run_forever()
