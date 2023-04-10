@@ -71,13 +71,19 @@ class Crawler():
         self.driver.switch_to.new_window('tab')
         self.driver.get(google)
 
+        
+        sleep(1 + uniform(0,1))
+
         email: WebElement = wait(Login.google.email, self.driver)
+        move_pointer_to_element(email, self.driver)
         send('deshawn.m.williams01@gmail.com', email, self.driver)
-        randomize_pause(1,3)
+
+        sleep(1 + uniform(0,1))
         
         password: WebElement = wait(Login.google.password, self.driver)
         send('Ciddate0!', password, self.driver)
-        randomize_pause(1,3)
+        
+        sleep(1 + uniform(0,1))
 
         self.driver.implicitly_wait(1)
 
