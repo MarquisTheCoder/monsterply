@@ -70,27 +70,34 @@ class Crawler():
         original_window = self.driver.current_window_handle
         self.driver.switch_to.new_window('tab')
         self.driver.get(google)
+        
+        # sleep(1 + uniform(0,1))
+
+        # email: WebElement = wait(Login.google.email, self.driver)
+        # move_pointer_to_element(email, self.driver)
+        # send('deshawn.m.williams01@gmail.com', email, self.driver)
+
+        # sleep(1 + uniform(0,1))
+        
+        # password: WebElement = wait(Login.google.password, self.driver)
+        # move_pointer_to_element(password, self.driver)
+        # send('Ciddate0!', password, self.driver)
+        
+
+        password_next: WebElement = wait(Login.google.next_password, 
+                                         driver=self.driver,
+                                         timeout=50)
 
         
-        sleep(1 + uniform(0,1))
-
-        email: WebElement = wait(Login.google.email, self.driver)
-        move_pointer_to_element(email, self.driver)
-        send('deshawn.m.williams01@gmail.com', email, self.driver)
-
-        sleep(1 + uniform(0,1))
-        
-        password: WebElement = wait(Login.google.password, self.driver)
-        move_pointer_to_element(password, self.driver)
-        send('Ciddate0!', password, self.driver)
-        
-        sleep(1 + uniform(0,1))
-
-        self.driver.implicitly_wait(1)
+        randomize_pause(2,3)
 
         self.driver.close()
 
         self.driver.switch_to(self.driver.window_handles[0])
+
+        google_login: WebElement = wait(Login.google_login, driver=self.driver)
+        move_pointer_to_element(google_login, self.driver)
+        google_login.click()
 
     def search_job(self, job: str) -> None:
         search_bar: WebElement = wait(HomePaths.search_bar,self.driver, timeout=180)
