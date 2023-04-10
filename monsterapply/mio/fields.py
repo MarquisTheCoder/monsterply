@@ -46,9 +46,6 @@ def send(message: str, into: WebElement, driver: WebDriver, wpm: int = 150) -> N
             #         into.send_keys(j)
             #         _calculate_type_speed(wpm)
 
-        into.send_keys(Keys.ENTER)
-        into.send_keys(Keys.ENTER)
-
     except Exception:
         pass
 

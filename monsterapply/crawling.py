@@ -112,6 +112,7 @@ class Crawler():
         send(job, into=search_bar, driver=self.driver)
         location_bar: WebElement = wait(HomePaths.location, self.driver)
         send(location, into=location_bar, driver=self.driver)
+        wait(HomePaths.search_button, self.driver).click()
 
     def check_page(self, base_url, next_page):
 
