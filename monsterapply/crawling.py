@@ -108,8 +108,8 @@ class Crawler():
 
 
     def check_page(self, job: str, location: str, page: int) -> bool:
-        response: requests = requests.get(self.form_query(job, location, page))
-        if 'sorry' in requests.text.lower():
+        response = requests.get(self.form_query(job, location, page))
+        if 'sorry' in response.text.lower():
             return False
         return True
 
