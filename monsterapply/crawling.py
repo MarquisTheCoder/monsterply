@@ -144,7 +144,7 @@ class Crawler():
     def apply_for_job(self, button: WebElement) -> None:
         button.click()
         self.driver.switch_to.window(self.driver.window_handles[1])
-        randomize_pause(2,3)
+        sleep(120)
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
 
