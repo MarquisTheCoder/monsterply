@@ -81,14 +81,20 @@ class Crawler():
         google_login_email: WebElement = wait(Login.google.email, self.driver)
         move_pointer_to_element(google_login_email, self.driver)
         send(email, into=google_login_email, driver=self.driver)
+
+        randomize_pause(1.0, 2.5)
         
         google_login_email_next: WebElement = wait(Login.google.next_email, self.driver)
         move_pointer_to_element(google_login_email_next, self.driver)
         google_login_email_next.click()
 
+        randomize_pause(0.5, 3.2)
+
         google_login_password: WebElement = wait(Login.google.password, self.driver)
         move_pointer_to_element(google_login_password, self.driver)
         send(password, into=google_login_password, driver=self.driver)
+
+        randomize_pause(1.2, 4.0)
 
         google_login_password_next: WebElement = wait(Login.google.next_password, self.driver)
         move_pointer_to_element(google_login_email_next, self.driver)
