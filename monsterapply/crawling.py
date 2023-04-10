@@ -90,7 +90,7 @@ class Crawler():
 
 
     def form_query(self, job: str, location: str, page: int):
-        return 'https://www.monster.com/jobs/search?q={job}&where={location}&page={page}&so=m.h.lh' 
+        return f'https://www.monster.com/jobs/search?q={job}&where={location}&page={page}&so=m.h.lh' 
     
 
     def search_job(self, job: str, location: str, page: str) -> None:
@@ -103,7 +103,7 @@ class Crawler():
         self.search_job(job, location, page)
         self.load_jobs()
         self.apply_for_jobs()
-        if self.check_page(self.form_query(job, location, page + 1)):
+        if self.check_page(job, location, page + 1):
             self.search_jobs(job, location, page + 1)
 
 
