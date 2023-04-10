@@ -68,7 +68,7 @@ class Crawler():
     def bypass_google_login(self) -> None:
         
         square_settings = "/html/body/div[1]/div[1]/div/div/div/div[2]/div/div/div/a"
-        goto_account = '//*[@id="yDmH0d"]/c-wiz/div/div/c-wiz/div/div/div[2]/div[2]/div[1]/ul/li[1]/a'
+        goto_account = '/html/body/div/c-wiz/div/div/c-wiz/div/div/div[2]/div[2]/div[1]/ul/li[1]'
         sign_in = "/html/body/div[1]/div[1]/div/div/div/div[2]/a"
 
         
