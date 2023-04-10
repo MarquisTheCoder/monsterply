@@ -68,22 +68,22 @@ class Crawler():
     def bypass_login(self) -> None:
 
         open_new_tab(self.driver)
-        self.driver.switch_to(self.driver.window_handles[1])
-        self.driver.get(google)
+        # self.driver.switch_to(self.driver.window_handles[1])
+        # self.driver.get(google)
 
-        email: WebElement = wait(Login.google.email, self.driver)
-        send('deshawn.m.williams01@gmail.com', email, self.driver)
-        randomize_pause(1,3)
+        # email: WebElement = wait(Login.google.email, self.driver)
+        # send('deshawn.m.williams01@gmail.com', email, self.driver)
+        # randomize_pause(1,3)
         
-        password: WebElement = wait(Login.google.password, self.driver)
-        send('Ciddate0!', password, self.driver)
-        randomize_pause(1,3)
+        # password: WebElement = wait(Login.google.password, self.driver)
+        # send('Ciddate0!', password, self.driver)
+        # randomize_pause(1,3)
 
-        self.driver.implicitly_wait(1)
+        # self.driver.implicitly_wait(1)
 
-        self.driver.close()
+        # self.driver.close()
 
-        self.driver.switch_to(self.driver.window_handles[0])
+        # self.driver.switch_to(self.driver.window_handles[0])
 
     def search_job(self, job: str) -> None:
         search_bar: WebElement = wait(HomePaths.search_bar,self.driver, timeout=180)
