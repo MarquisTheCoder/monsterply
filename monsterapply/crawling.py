@@ -53,7 +53,7 @@ class Crawler():
     def crawl(self) -> None:
         self.goto_home()
         # self.open_login_page()
-        self.bypass_login()
+        self.bypass_google_login()
         self.search_job("Entry Web Developer")
     def goto_home(self) -> None:
         self.driver.get(base_url)
@@ -65,34 +65,43 @@ class Crawler():
         randomize_pause(1, 2)
         login_button.click()
         
-    def bypass_login(self) -> None:
+    def bypass_google_login(self) -> None:
+        
+        square_settings = "/html/body/div[1]/div[1]/div/div/div/div[2]/div/div/div/a"
+        goto_account = "/html/body/div/c-wiz/div/div/c-wiz/div/div/div[2]/div[2]/div[1]/ul/li[1]/a"
+        sign_in = "/html/body/div[1]/div[1]/div/div/div/div[2]/a"
+
+        
 
         original_window = self.driver.current_window_handle
+
         self.driver.switch_to.new_window('tab')
         self.driver.get(google)
-        
-        # sleep(1 + uniform(0,1))
 
-        # email: WebElement = wait(Login.google.email, self.driver)
-        # move_pointer_to_element(email, self.driver)
-        # send('deshawn.m.williams01@gmail.com', email, self.driver)
+        wait(square_settings, self.driver).click()
+        wait(goto_account, self.driver).click()
+  
+        sleep(1 + uniform(0,1))
 
-        # sleep(1 + uniform(0,1))
-        
-        # password: WebElement = wait(Login.google.password, self.driver)
-        # move_pointer_to_element(password, self.driver)
-        # send('Ciddate0!', password, self.driver)
-        
+        email: WebElement = wait(Login.google.email, self.driver)
+        move_pointer_to_element(email, self.driver)
+        send('deshawn.m.williams01@gmail.com', email, self.driver)
 
+        sleep(1 + uniform(0,1))
+        
+        password: WebElement = wait(Login.google.password, self.driver)
+        move_pointer_to_element(password, self.driver)
+        send('Ciddate0!', password, self.driver)
+        
+        
         signed_in: WebElement = wait(Login.google.signed_in, 
                                          driver=self.driver,
                                          timeout=100)
 
         self.driver.close()
 
-        self.driver.switch_to.window(self.driver.window_handles[0])
+        self.driver.switch_to.window(original_window)
         
-        randomize_pause(2,3)
 
         google_login: WebElement = wait(Login.google_login, driver=self.driver)
         move_pointer_to_element(google_login, self.driver)
