@@ -13,7 +13,7 @@ def main() -> None:
     print(get_user_agent())
     # file()
 
-    crawler: Crawler = Crawler(driver= new_driver())
+    crawler: Crawler = Crawler()
     crawler.crawl()
     
 if __name__ == '__main__':
