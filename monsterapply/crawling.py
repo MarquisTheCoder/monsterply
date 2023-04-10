@@ -114,37 +114,42 @@ class Crawler():
         send(location, into=location_bar, driver=self.driver)
         wait(HomePaths.search_button, self.driver).click()
 
-    def check_page(self, base_url, next_page):
-
+    def url_handling(self, url):
         parse_url = base_url.split('&')
         if 'page' in parse_url[len(parse_url) - 1]:
-            parse_url.pop()
+            parse_url.pop() 
+        return parse_url
+
+    def check_page(self, base_url, next_page):
+
+        parse_url = self.url_handling(base_url)
 
         response = requests.get(f'{parse_url}&page={next_page}')
-        if "Sorry, no jobs found for that search" in response.text:
+        if 'sorry' in response.text.lower():
             return False
         return True
 
     def load_jobs(self) -> None: 
 
         hold: WebDriverWait = WebDriverWait(self.driver, 10000)
-
         hold.until(ec.presence_of_element_located((By.CLASS_NAME,"apply-buttonstyle__JobApplyButton-sc-1xcccr3-0")))
-
         apply_buttons = self.driver.find_elements(By.CLASS_NAME, "apply-buttonstyle__JobApplyButton-sc-1xcccr3-0")
 
         for apply_button in apply_buttons:
-            print(apply_button.text)
             if 'quick' in apply_button.text.lower():
                 print(apply_button.text)
                 self.apply_for_job(apply_button)
-
-        sleep(60000)
+        
+        if self.check_page(self.driver.current_url, self.current_page + 1):
+            self.current_page = self.current_page + 1
+            self.driver.get(f'{self.url_handling(self.driver.current_url)}&page={self.current_page}')
+            self.load_jobs()
 
     def apply_for_job(self, button: WebElement) -> None:
         button.click()
         self.driver.switch_to.window(self.driver.window_handles[1])
-        wait(HomePaths.home, self.driver, timeout=30)
+        wait('/html/body/div[1]/div[2]/div[2]/div/div/button', self.driver, timeout=30)
+        randomize_pause(1,4)
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
 
