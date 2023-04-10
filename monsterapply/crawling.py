@@ -56,21 +56,21 @@ class Crawler():
     def crawl(self) -> None:
         self.goto_home()
         self.bypass_google_login()
-        self.search_job("Software Developer", "California")
-        self.load_jobs("Software Developer", "California")
+        self.search_jobs("Software Developer", "California", 1)
+
 
     def goto_home(self) -> None:
         self.driver.get(base_url)
     
-    def open_login_page(self) -> None:
 
+    def open_login_page(self) -> None:
         login_button: WebElement = wait(HomePaths.login_button, self.driver)
         move_pointer_to_element(login_button, self.driver)
         randomize_pause(1, 2)
         login_button.click()
-        
-    def bypass_google_login(self) -> None:
-         
+
+
+    def bypass_google_login(self) -> None: 
         original_window = self.driver.current_window_handle
         self.driver.switch_to.new_window('tab')
         self.driver.get(google)
@@ -81,7 +81,6 @@ class Crawler():
                                          timeout=100)
 
         self.driver.close()
-
         self.driver.switch_to.window(original_window)
         
         homepage_login: WebElement = wait(HomePaths.login_button, driver=self.driver).click()
@@ -90,29 +89,32 @@ class Crawler():
         google_login.click()
 
 
-    def search_job(self, job: str, location: str) -> None:
-        search_bar: WebElement = wait(HomePaths.search_bar, self.driver, timeout=180)
-        send(job, into=search_bar, driver=self.driver)
-        location_bar: WebElement = wait(HomePaths.location, self.driver)
-        send(location, into=location_bar, driver=self.driver)
-        wait(HomePaths.search_button, self.driver).click()
+    def form_query(self, job: str, location: str, page: int):
+        return 'https://www.monster.com/jobs/search?q={job}&where={location}&page={page}&so=m.h.lh' 
+    
 
-    def url_handling(self, url, next_page):
-        x = url.split('&')
-        for i in range(len(x) -1):
-            if 'page' in x[i]:
-                x.pop(i)
-        return "&".join(x) + f'&page={next_page}'
+    def search_job(self, job: str, location: str, page: str) -> None:
+        location = location.replace(' ', '+')
+        location = location.replace(',', '%2C')
+        self.driver.get(self.form_query(job, location, page)) 
+       
+
+    def search_jobs(self, job: str, location: str, page: int ):
+        self.search_job(job, location, page)
+        self.load_jobs()
+        self.apply_for_jobs()
+        if self.check_page(self.form_query(job, location, page + 1)):
+            self.search_jobs(job, location, page + 1)
 
 
-    def check_page(self, base_url, next_page):
-        parse_url = self.url_handling(base_url, next_page)
-        response = requests.get(parse_url)
-        if 'sorry' in response.text.lower():
+    def check_page(self, job: str, location: str, page: int) -> bool:
+        response: requests = requests.get(self.form_query(job, location, page))
+        if 'sorry' in requests.text.lower():
             return False
         return True
 
-    def load_jobs(self, search: str, location: str, current_page: int = 1) -> None: 
+
+    def load_jobs(self) -> None: 
 
         hold: WebDriverWait = WebDriverWait(self.driver, 10000)
 
@@ -124,6 +126,16 @@ class Crawler():
 
         randomize_pause(4,5)
 
+    def apply_for_job(self, button: WebElement) -> None:
+            button.click()
+            self.driver.switch_to.window(self.driver.window_handles[1])
+            wait('/html/body/div[1]/div[2]/div[2]/div/div/button', self.driver, timeout=30)
+            randomize_pause(3,4.3)
+            self.driver.close()
+            self.driver.switch_to.window(self.driver.window_handles[0])
+
+    def apply_for_jobs(self) -> None:
+
         apply_buttons = self.driver.find_elements(By.CLASS_NAME, "apply-buttonstyle__JobApplyButton-sc-1xcccr3-0")
 
         for apply_button in apply_buttons:
@@ -131,20 +143,7 @@ class Crawler():
                 print(apply_button.text)
                 self.apply_for_job(apply_button)
 
-        sleep(6000000)
-        # next_page = f'https://{self.driver.current_url}jobs/search?q={search.replace(" ", "+")}&where={location}&page={current_page}' 
-        # if self.check_page(next_page, current_page + 1):
-        #     current_page = current_page + 1
-        #     self.driver.get()
-        #     self.load_jobs(current_page)  
-
-    def apply_for_job(self, button: WebElement) -> None:
-        button.click()
-        self.driver.switch_to.window(self.driver.window_handles[1])
-        wait('/html/body/div[1]/div[2]/div[2]/div/div/button', self.driver, timeout=30)
-        randomize_pause(3,4.3)
-        self.driver.close()
-        self.driver.switch_to.window(self.driver.window_handles[0])
+   
 
     
 
