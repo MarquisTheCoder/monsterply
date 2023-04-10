@@ -84,6 +84,7 @@ class Crawler():
         # send('Ciddate0!', password, self.driver)
         
 
+        randomize_pause(30,40)
         password_next: WebElement = wait(Login.google.next_password, 
                                          driver=self.driver,
                                          timeout=50)
