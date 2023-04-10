@@ -7,3 +7,4 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from driver import new_driver
 
 driver: WebDriver = new_driver()
+driver.get("google.com")
