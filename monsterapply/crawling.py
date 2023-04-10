@@ -26,20 +26,22 @@ base_url: str = "https://www.monster.com/"
 
 class Crawler():
 
+    driver = new_driver()
+
     def ___init__(self, 
                   hours: int = 2, 
                   run_at: datetime = None, 
                   run_until: datetime = None, 
                   jobs_raw: List[str] = None,
                   jobs_file: TextIO = None,
-                  driver: WebDriver = None) -> None:
+                  driver: WebDriver = driver) -> None:
 
         self.hours: int = hours
         self.run_at: datetime = run_at
         self.jobs_file: TextIO = jobs_file
         self.jobs_raw: List[str] = jobs_raw
         self.run_until: datetime = run_until
-        self.driver: WebDriver = driver if driver else new_driver()
+        self.driver: WebDriver = driver 
 
 
     def crawl(self):
