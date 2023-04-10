@@ -12,6 +12,7 @@ from driver import new_driver
 
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.common.keys import Keys
 
 from traversing.paths.types import XPATH
 from traversing.paths.login import Login
@@ -33,23 +34,24 @@ google: str = "https://google.com"
 
 class Crawler():
 
-    current_page: int = 1
     driver: WebDriver = new_driver()
-
+    
     def ___init__(self, 
                   hours: int = 2, 
                   run_at: datetime = None, 
                   run_until: datetime = None, 
                   jobs_raw: List[str] = None,
                   jobs_file: TextIO = None,
-                  driver: WebDriver = driver) -> None:
+                  driver: WebDriver = driver,
+                  current_page: int = 1) -> None:
 
         self.hours: int = hours
         self.run_at: datetime = run_at
         self.jobs_file: TextIO = jobs_file
         self.jobs_raw: List[str] = jobs_raw
         self.run_until: datetime = run_until
-        self.driver: WebDriver = driver 
+        self.driver: WebDriver = driver
+        self.current_page = current_page 
     
 
     def crawl(self) -> None:
@@ -135,6 +137,9 @@ class Crawler():
 
         hold: WebDriverWait = WebDriverWait(self.driver, 10000)
         hold.until(ec.presence_of_element_located((By.CLASS_NAME,"apply-buttonstyle__JobApplyButton-sc-1xcccr3-0")))
+
+        self.driver.find_element(By.ID, "JobCardGrid").send_keys(Keys.PAGE_DOWN)
+
         randomize_pause(3,5)
 
         apply_buttons = self.driver.find_elements(By.CLASS_NAME, "apply-buttonstyle__JobApplyButton-sc-1xcccr3-0")
@@ -144,8 +149,8 @@ class Crawler():
                 print(apply_button.text)
                 self.apply_for_job(apply_button)
         
-        if self.check_page(self.driver.current_url, current_page + 1):
-            current_page = current_page + 1
+        if self.check_page(self.driver.current_url, self.current_page + 1):
+            self.current_page = self.current_page + 1
             self.driver.get(f'{self.url_handling(self.driver.current_url)}&page={self.current_page}')
             self.load_jobs()
 
