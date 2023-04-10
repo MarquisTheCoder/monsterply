@@ -52,50 +52,22 @@ class Crawler():
 
     def crawl(self) -> None:
         self.goto_home()
-        self.open_login_page()
-        self.bypass_login('deshawn.m.williams01@gmail.com', 'Ciddate0!')
+        # self.open_login_page()
+        self.bypass_login()
 
     def goto_home(self) -> None:
         self.driver.get(base_url)
     
     def open_login_page(self) -> None:
-
         login_button: WebElement = wait(HomePaths.login_button, self.driver)
         move_pointer_to_element(login_button, self.driver)
+        randomize_pause(1, 2)
         login_button.click()
 
-        """logged in already"""
-
-    def bypass_login(self, email: str, password: str) -> None:
-
-        login_with_google: WebElement = wait(Login.google_login, self.driver)
-        move_pointer_to_element(login_with_google, self.driver)
-        login_with_google.click()
-        
-        randomize_pause(1.0, 2.5)
-
-        google_login_email: WebElement = wait(Login.google.email, self.driver)
-        move_pointer_to_element(google_login_email, self.driver)
-        send(email, into=google_login_email, driver=self.driver)
-
-        randomize_pause(1.0, 2.5)
-        
-        google_login_email_next: WebElement = wait(Login.google.next_email, self.driver)
-        move_pointer_to_element(google_login_email_next, self.driver)
-        google_login_email_next.click()
-
-        randomize_pause(0.5, 3.2)
-
-        google_login_password: WebElement = wait(Login.google.password, self.driver)
-        move_pointer_to_element(google_login_password, self.driver)
-        send(password, into=google_login_password, driver=self.driver)
-
-        randomize_pause(1.2, 4.0)
-
-        google_login_password_next: WebElement = wait(Login.google.next_password, self.driver)
-        move_pointer_to_element(google_login_email_next, self.driver)
-        google_login_password_next.click()
- 
+    def bypass_login(self) -> None:
+        google_login_password_next: WebElement = wait(Login.google.next_password, 
+                                                      driver=self.driver,
+                                                      timeout=100) 
     # @raises_not_found
     def search_job(self, job: str) -> None:
         search_bar: WebElement = wait(HomePaths.search_bar,self.driver, timeout=180)
