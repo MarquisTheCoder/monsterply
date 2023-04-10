@@ -31,10 +31,10 @@ def new_driver() -> WebDriver:
     chrome: WebDriver = uc2.Chrome(version_main=111, chrome_options=chrome_options)
     chrome.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})") 
 
-    if current_system == 'darwin':
+    if (current_system == 'darwin'):
         chrome_options.add_argument(f'user-data-dir=/Users/{getlogin()}/Library/Application Support/Google/Chrome/Default')
 
-    elif current_system == 'windows':
+    elif (current_system == 'windows'):
         chrome_options.add_argument(f'user-data-dir=C:\Users\{getlogin()}\AppData\Local\Google\Chrome\User Data\Default')
 
     else:
