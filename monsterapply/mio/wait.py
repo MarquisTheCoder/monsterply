@@ -17,6 +17,7 @@ def mili_to_seconds(mili: int) -> int:
 
 def wait(to_find: str, driver: WebDriver,timeout: int = mili_to_seconds(15)):
 
+    timeout = mili_to_seconds(timeout)
     wait: WebDriverWait = WebDriverWait(driver, timeout)
 
     # try:
