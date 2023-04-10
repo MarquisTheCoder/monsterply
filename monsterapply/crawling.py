@@ -20,8 +20,8 @@ from traversing.paths.recommended_jobs import RecommendedPaths
 
 
 from mio.wait import *
+from mio.actions import *
 from mio.fields import send
-from mio.actions import move_pointer_to_element
 
 """Handles exception handling"""
 
@@ -29,7 +29,7 @@ from exceptions import *
 
 
 base_url: str = "https://www.monster.com/"
-
+google: str = "https://accounts.google.com/v3/signin/identifier?flowName=GlifWebSignIn&flowEntry=ServiceLogin"
 class Crawler():
 
     driver = new_driver()
@@ -59,16 +59,32 @@ class Crawler():
         self.driver.get(base_url)
     
     def open_login_page(self) -> None:
+
         login_button: WebElement = wait(HomePaths.login_button, self.driver)
         move_pointer_to_element(login_button, self.driver)
         randomize_pause(1, 2)
         login_button.click()
-
+        
     def bypass_login(self) -> None:
-        google_login_password_next: WebElement = wait(Login.google.next_password, 
-                                                      driver=self.driver,
-                                                      timeout=100) 
-    # @raises_not_found
+
+        open_new_tab(self.driver)
+        self.driver.switch_to(self.driver.window_handles[1])
+        self.driver.get(google)
+
+        email: WebElement = wait(Login.google.email, self.driver)
+        send('deshawn.m.williams01@gmail.com', email, self.driver)
+        randomize_pause(1,3)
+        
+        password: WebElement = wait(Login.google.password, self.driver)
+        send('Ciddate0!', password, self.driver)
+        randomize_pause(1,3)
+
+        self.driver.implicitly_wait(1)
+
+        self.driver.close()
+
+        self.driver.switch_to(self.driver.window_handles[0])
+
     def search_job(self, job: str) -> None:
         search_bar: WebElement = wait(HomePaths.search_bar,self.driver, timeout=180)
         send(job, into=search_bar, driver=self.driver)

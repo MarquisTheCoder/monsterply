@@ -7,3 +7,6 @@ from selenium.webdriver.common.action_chains import ActionChains
 def move_pointer_to_element(element: WebElement, driver: WebDriver):
     actions = ActionChains(driver)
     actions.move_to_element(element).perform()
+
+def open_new_tab(driver: WebDriver) -> None:
+    driver.execute_script("window.open('');")

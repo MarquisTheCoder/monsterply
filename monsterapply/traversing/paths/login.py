@@ -8,7 +8,7 @@ class Login:
     password: XPATH = '//*[@id="password"]'
 
     class google:
-        email: XPATH = '//*[@id="identifierId"]'
-        next_email: XPATH = '//*[@id="identifierNext"]/div/button' 
-        password: XPATH = '//*[@id="password"]/div[1]/div/div[1]/input'
-        next_password: XPATH = '//*[@id="passwordNext"]/div/button'
+        email: XPATH = '/html/body/div[1]/div[1]/div[2]/div/c-wiz/div/div[2]/div/div[1]/div/form/span/section/div/div/div[1]/div/div[1]/div/div[1]/input'
+        next_email: XPATH = '/html/body/div[1]/div[1]/div[2]/div/c-wiz/div/div[2]/div/div[2]/div/div[1]/div/div/button' 
+        password: XPATH = '/html/body/div[1]/div[1]/div[2]/div/c-wiz/div/div[2]/div/div[1]/div/form/span/section[2]/div/div/div[1]/div[1]/div/div/div/div/div[1]/div/div[1]/input'
+        next_password: XPATH = '/html/body/div[1]/div[1]/div[2]/div/c-wiz/div/div[2]/div/div[2]/div/div[1]/div/div/button'
