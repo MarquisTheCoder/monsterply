@@ -36,10 +36,8 @@ def move_pointer_to_element(element: WebElement, driver: WebDriver):
     y_i = si.splev(ipl_t, y_list) # y interpolate values
 
     action = ActionChains(driver)
-    action.move_to_element(element)
-    action.perform()
-
+    
     for mouse_x, mouse_y in zip(x_i, y_i):
-        action.move_by_offset(mouse_x,mouse_y);
+        action.move_to_element_by_offset(element, mouse_x, mouse_y);
         action.perform();
         print(mouse_x, mouse_y)
