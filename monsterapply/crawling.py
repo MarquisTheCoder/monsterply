@@ -107,9 +107,7 @@ class Crawler():
 
 
     def check_page(self, base_url, next_page):
-
         parse_url = self.url_handling(base_url, next_page)
-
         response = requests.get(parse_url)
         if 'sorry' in response.text.lower():
             return False
