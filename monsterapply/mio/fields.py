@@ -8,11 +8,11 @@ from selenium.webdriver.remote.webelement import WebElement
 def _calculate_type_speed(wpm: int) -> None:
     """Wait for a random amount of time to simulate human typing speed."""
     words_per_second = wpm * 60
-    delay = normalvariate(1/words_per_second, 0.1) 
+    delay = abs(normalvariate(1/words_per_second, 0.1))
     sleep(delay)
 
 
-def send(message: str, into: WebElement, driver: WebDriver, wpm: int = 40) -> None:
+def send(message: str, into: WebElement, driver: WebDriver, wpm: int = 90) -> None:
     """Type a message into an input field."""
     try:
 
@@ -53,7 +53,7 @@ def send(message: str, into: WebElement, driver: WebDriver, wpm: int = 40) -> No
         pass
 
 
-def _simulate_typing_error(into: WebElement, message: str, i: int, wpm: int = 40) -> None:
+def _simulate_typing_error(into: WebElement, message: str, i: int, wpm: int = 90) -> None:
     """Simulate a typing error by backspacing and retyping the previous character."""
     sleep(uniform(0.1, 0.3))
     into.send_keys(Keys.BACKSPACE)
