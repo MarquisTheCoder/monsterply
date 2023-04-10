@@ -32,14 +32,14 @@ class Crawler:
                   run_until: datetime = None, 
                   jobs_raw: List[str] = None,
                   jobs_file: TextIO = None,
-                  driver: WebDriver = new_driver()) -> None:
+                  driver: WebDriver = None) -> None:
 
         self.hours: int = hours
         self.run_at: datetime = run_at
         self.jobs_file: TextIO = jobs_file
         self.jobs_raw: List[str] = jobs_raw
         self.run_until: datetime = run_until
-        self.driver: WebDriver = driver
+        self.driver: WebDriver = driver if driver else new_driver()
 
 
     def crawl(self):
