@@ -13,24 +13,23 @@ import pickle
 import asyncio
 from time import sleep
 from itertools import count
+from concurrent.futures import ProcessPoolExecutor
 
 driver: WebDriver = new_driver()
 
-async def start_driver():
+def start_driver():
     driver.get("https://google.com")
-    await sleep(2)
     wait(HomePaths.home, driver=driver, timeout=100000)
 
 
-async def save_cookies():
-    async for _ in count(0):
+def save_cookies():
+    for _ in count(0):
         sleep(0.5)
         pickle.dump(driver.get_cookies(), open("cookies/cookies.pkl", "wb"))
 
+executor = ProcessPoolExecutor(2)
+loop = asyncio.new_event_loop()
+boo = loop.run_in_executor(executor, start_driver)
+baa = loop.run_in_executor(executor, save_cookies)
 
-async def run_both():
-    start_driver()
-    save_cookies()
-
-
-asyncio.run(run_both())
+loop.run_forever()
