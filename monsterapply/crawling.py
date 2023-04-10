@@ -132,7 +132,7 @@ class Crawler():
         if self.check_page(self.driver.current_url, current_page + 1):
             current_page = current_page + 1
             self.driver.get(f'{self.url_handling(self.driver.current_url)}&page={current_page}')
-            self.load_jobs(current_page)
+            self.load_jobs(current_page)  
 
     def apply_for_job(self, button: WebElement) -> None:
         button.click()
