@@ -99,12 +99,12 @@ class Crawler():
         wait(HomePaths.search_button, self.driver).click()
 
     def url_handling(self, url):
-        
-        if 'page' in url:
-            parse_url = base_url.split('&')
-            parse_url.pop()
-            return "&".join(parse_url) 
-        return url
+        x = url.split('&')
+        for i in range(len(x)):
+            if 'page' in x[i]:
+                x.remove[i]
+        return "&".join(x) 
+
 
     def check_page(self, base_url, next_page):
 
