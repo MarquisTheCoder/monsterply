@@ -17,9 +17,9 @@ def wait(to_find: str, driver: WebDriver,timeout: int = mili_to_seconds(5)):
 
     wait: WebDriverWait = WebDriverWait(driver, timeout)
 
-    try:
-        to_find = wait.until(ec.presence_of_element_located(By.XPATH, to_find))
-        return to_find
+    # try:
+    to_find: WebElement = wait.until(ec.presence_of_element_located(By.XPATH, to_find))
+    return to_find
     
-    except NoSuchElementException(BaseException):
-       print(f"No such element")
+    # except Exception:
+    #    raise NoSuchElementException

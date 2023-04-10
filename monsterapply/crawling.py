@@ -67,7 +67,7 @@ class Crawler():
         except Exception:
             """logged in already"""
 
-    @raises_not_found
+    # @raises_not_found
     def search_job(self, job: str):
         search_bar: WebElement = wait(HomePaths.search_bar,self.driver)
         send(job, into=search_bar, driver=self.driver)
