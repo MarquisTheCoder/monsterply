@@ -14,7 +14,7 @@ from selenium.webdriver.remote.webelement import WebElement
 
 
 def _calculate_type_speed(wpm: int):
-    return floor(choice((50, 100, 100, 150)) / (wpm * 4)) 
+    return floor(choice((50, 100, 100, 150)) / (wpm * 1.5)) 
 
 def send(message: str, into: WebElement, driver: WebDriver) -> None:
 
