@@ -105,7 +105,6 @@ class Crawler():
         homepage_login: WebElement = wait(HomePaths.login_button, driver=self.driver).click()
         randomize_pause(2,3)
         google_login: WebElement = wait(Login.google_login, driver=self.driver)
-        move_pointer_to_element(google_login, self.driver)
         google_login.click()
 
 
