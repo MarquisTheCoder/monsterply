@@ -17,6 +17,7 @@ def move_pointer_to_element(element: WebElement, driver: WebDriver):
 # Define the control points for the Bézier curve
     p0 = element.location
     p3 = element.location
+    
     p1 = {'x': p0['x'] + 100, 'y': p0['y'] + 100}
     p2 = {'x': p3['x'] + 100, 'y': p3['y'] + 100}
 
