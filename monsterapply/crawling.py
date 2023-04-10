@@ -29,7 +29,7 @@ from exceptions import *
 
 
 base_url: str = "https://www.monster.com/"
-google: str = "https://accounts.google.com/v3/signin/identifier?flowName=GlifWebSignIn&flowEntry=ServiceLogin"
+google: str = "https://google.com"
 class Crawler():
 
     driver = new_driver()
@@ -54,7 +54,7 @@ class Crawler():
         self.goto_home()
         # self.open_login_page()
         self.bypass_login()
-
+        self.search_job("Entry Web Developer")
     def goto_home(self) -> None:
         self.driver.get(base_url)
     
