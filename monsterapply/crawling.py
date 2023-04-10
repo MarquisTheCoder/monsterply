@@ -103,7 +103,7 @@ class Crawler():
         for i in range(len(x) -1):
             if 'page' in x[i]:
                 x.pop(i)
-        return "&".join(x) + '&page=' + next_page
+        return "&".join(x) + f'&page={next_page}'
 
 
     def check_page(self, base_url, next_page):
