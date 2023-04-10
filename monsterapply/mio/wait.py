@@ -1,8 +1,6 @@
 
 
-from ..traversing.paths.types import XPATH
-
-from ...monsterapply.exceptions import BaseMonsterException
+from monsterapply.traversing.paths.types import XPATH
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
