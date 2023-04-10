@@ -138,7 +138,7 @@ class Crawler():
         hold: WebDriverWait = WebDriverWait(self.driver, 10000)
         hold.until(ec.presence_of_element_located((By.CLASS_NAME,"apply-buttonstyle__JobApplyButton-sc-1xcccr3-0")))
 
-        self.driver.find_element(By.ID, "JobCardGrid").send_keys(Keys.PAGE_DOWN)
+        self.driver.execute_script(f'window.scrollTo(0, {self.driver.get_window_size()["height"]}')
 
         randomize_pause(3,5)
 
