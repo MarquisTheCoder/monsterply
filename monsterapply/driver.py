@@ -32,6 +32,6 @@ def new_driver() -> WebDriver:
     cookies = pickle.load(open("cookies/cookies.pkl", "rb"))
 
     for cookie in cookies:
-        chrome.add_cookie(cookie)
+        print(cookie)
 
     return chrome
