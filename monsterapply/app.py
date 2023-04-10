@@ -12,7 +12,7 @@ def main() -> None:
     print(get_user_agent())
     # file()
 
-    crawler: crawling.Crawler = crawling.Crawler()
+    crawler: Crawler = Crawler()
     crawler.crawl()
     
 if __name__ == '__main__':
