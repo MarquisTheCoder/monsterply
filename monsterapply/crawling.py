@@ -99,28 +99,33 @@ class Crawler():
         wait(HomePaths.search_button, self.driver).click()
 
     def url_handling(self, url):
-        parse_url = base_url.split('&')
-        if 'page' in parse_url[len(parse_url) - 1]:
-            parse_url.pop() 
-        return parse_url
+        
+        if 'page' in url:
+            parse_url = base_url.split('&')
+            parse_url.pop()
+            return "&".join(parse_url) 
+        return url
 
     def check_page(self, base_url, next_page):
 
         parse_url = self.url_handling(base_url)
 
-        response = requests.get(f'{parse_url}&page={next_page}')
+        response = requests.get(f'{parse_url}')
         if 'sorry' in response.text.lower():
             return False
         return True
 
-    def load_jobs(self, current_page: int = 1) -> None: 
+    def load_jobs(self, search: str, location: str, current_page: int = 1) -> None: 
 
         hold: WebDriverWait = WebDriverWait(self.driver, 10000)
+
+        self.driver.execute_script(f'window.scrollTo(0, {self.driver.get_window_size()["height"]})')
+
         hold.until(ec.presence_of_element_located((By.CLASS_NAME,"apply-buttonstyle__JobApplyButton-sc-1xcccr3-0")))
 
         self.driver.execute_script(f'window.scrollTo(0, {self.driver.get_window_size()["height"]})')
 
-        randomize_pause(3,5)
+        randomize_pause(4,5)
 
         apply_buttons = self.driver.find_elements(By.CLASS_NAME, "apply-buttonstyle__JobApplyButton-sc-1xcccr3-0")
 
@@ -128,17 +133,18 @@ class Crawler():
             if 'quick' in apply_button.text.lower():
                 print(apply_button.text)
                 self.apply_for_job(apply_button)
-        
-        if self.check_page(self.driver.current_url, current_page + 1):
+
+        next_page = f'{self.driver.current_ulr}jobs/search?q={search.replace(" ", "+")}&where={location}&page={current_page}' 
+        if self.check_page(next_page, current_page + 1):
             current_page = current_page + 1
-            self.driver.get(f'{self.url_handling(self.driver.current_url)}&page={current_page}')
+            self.driver.get()
             self.load_jobs(current_page)  
 
     def apply_for_job(self, button: WebElement) -> None:
         button.click()
         self.driver.switch_to.window(self.driver.window_handles[1])
         wait('/html/body/div[1]/div[2]/div[2]/div/div/button', self.driver, timeout=30)
-        randomize_pause(1,4)
+        randomize_pause(3,4.3)
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
 
