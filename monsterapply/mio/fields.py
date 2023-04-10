@@ -14,15 +14,16 @@ from selenium.webdriver.remote.webelement import WebElement
 
 
 def _calculate_type_speed(wpm: int):
-    return floor(choice((50, 100, 100, 150)) / (wpm * 5.5)) 
+    return floor(choice((50, 100, 100, 150)) / (wpm * 4)) 
 
 def send(message: str, into: WebElement, driver: WebDriver) -> None:
 
     try:
         for character in message:
             into.send_keys(character)
-            sleep(_calculate_type_speed(90))
+            sleep(_calculate_type_speed(40))
 
+        randomize_pause(1,2.3)
         into.send_keys(Keys.ENTER)
 
     except Exception:
