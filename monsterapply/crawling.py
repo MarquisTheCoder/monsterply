@@ -30,9 +30,11 @@ import requests
 
 base_url: str = "https://www.monster.com/"
 google: str = "https://google.com"
+
 class Crawler():
 
-    driver = new_driver()
+    current_page: int = 1
+    driver: WebDriver = new_driver()
 
     def ___init__(self, 
                   hours: int = 2, 
@@ -48,7 +50,7 @@ class Crawler():
         self.jobs_raw: List[str] = jobs_raw
         self.run_until: datetime = run_until
         self.driver: WebDriver = driver 
-        self.current_page = 1
+    
 
     def crawl(self) -> None:
         self.goto_home()
@@ -133,6 +135,8 @@ class Crawler():
 
         hold: WebDriverWait = WebDriverWait(self.driver, 10000)
         hold.until(ec.presence_of_element_located((By.CLASS_NAME,"apply-buttonstyle__JobApplyButton-sc-1xcccr3-0")))
+        randomize_pause(3,5)
+
         apply_buttons = self.driver.find_elements(By.CLASS_NAME, "apply-buttonstyle__JobApplyButton-sc-1xcccr3-0")
 
         for apply_button in apply_buttons:
@@ -140,8 +144,8 @@ class Crawler():
                 print(apply_button.text)
                 self.apply_for_job(apply_button)
         
-        if self.check_page(self.driver.current_url, self.current_page + 1):
-            self.current_page = self.current_page + 1
+        if self.check_page(self.driver.current_url, current_page + 1):
+            current_page = current_page + 1
             self.driver.get(f'{self.url_handling(self.driver.current_url)}&page={self.current_page}')
             self.load_jobs()
 
