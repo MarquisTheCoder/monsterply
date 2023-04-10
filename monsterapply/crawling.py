@@ -94,11 +94,10 @@ class Crawler():
         
         randomize_pause(2,3)
 
-
-
         google_login: WebElement = wait(Login.google_login, driver=self.driver)
         move_pointer_to_element(google_login, self.driver)
         google_login.click()
+
 
     def search_job(self, job: str) -> None:
         search_bar: WebElement = wait(HomePaths.search_bar,self.driver, timeout=180)
