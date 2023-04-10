@@ -67,10 +67,8 @@ class Crawler():
         
     def bypass_login(self) -> None:
 
-        open_new_tab(self.driver)
-
-        self.driver.implicitly_wait(1)
-        self.driver.switch_to(self.driver.window_handles[1])
+        original_window = self.driver.current_window_handle
+        self.driver.switch_to.new_window('tab')
         self.driver.get(google)
 
         email: WebElement = wait(Login.google.email, self.driver)
