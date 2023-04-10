@@ -94,8 +94,6 @@ class Crawler():
     
 
     def search_job(self, job: str, location: str, page: str) -> None:
-
-
         self.driver.get(self.form_query(job, location, page)) 
        
 
@@ -107,13 +105,15 @@ class Crawler():
         self.search_job(job, takeaway_commas, page)
         self.load_jobs()
         self.apply_for_jobs()
-
-        if self.check_page(job, takeaway_commas, page + 1):
-            self.search_jobs(job, takeaway_commas, page + 1)
-
-
+        self.check_next_page(job, location, page + 1)
+        
     def check_next_page(self, job: str, location: str, page: int) -> bool:
         self.driver.get(self.form_query(job, location, page))
+        randomize_pause(2,4)
+        if 'Sorry' in self.driver.page_source:
+            print("last page")
+            exit(1)
+        self.search_jobs(job, location, page)
         
 
 
