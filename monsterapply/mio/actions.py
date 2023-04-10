@@ -28,7 +28,7 @@ def move_pointer_to_element(element: WebElement, driver: WebDriver):
 
     # create an ActionChains object and move the mouse cursor to the starting position
     actions = ActionChains(driver)
-    actions.move_to_element_with_offset(None, start_x, start_y).perform()
+    actions.move_to_element_with_offset(element, start_x, start_y).perform()
 
     # calculate the distance and direction to the element
     dx = x - start_x
@@ -55,13 +55,13 @@ def move_pointer_to_element(element: WebElement, driver: WebDriver):
         next_y = max(min(next_y, y), start_y)
         
         # move the mouse cursor to the next position
-        actions.move_to_element_with_offset(None, next_x, next_y).perform()
+        actions.move_to_element_with_offset(element, next_x, next_y).perform()
         
         # wait for a short time interval to simulate human-like movement
         sleep(time_interval)
 
     # move the mouse cursor to the final position of the element
-    actions.move_to_element_with_offset(None, x, y).perform()
+    actions.move_to_element_with_offset(element, x, y).perform()
 
 def open_new_tab(driver: WebDriver) -> None:
     driver.execute_script("window.open('');")
