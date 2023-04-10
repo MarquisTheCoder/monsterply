@@ -12,7 +12,7 @@ def _calculate_type_speed(wpm: int) -> None:
     sleep(delay)
 
 
-def send(message: str, into: WebElement, driver: WebDriver, wpm: int = 90) -> None:
+def send(message: str, into: WebElement, driver: WebDriver, wpm: int = 120) -> None:
 
     """Type a message into an input field."""
     try:
@@ -25,26 +25,26 @@ def send(message: str, into: WebElement, driver: WebDriver, wpm: int = 90) -> No
                 pause_length = triangular(0.1, 0.5, 0.3)  
                 sleep(pause_length)
 
-            if random() < 0.02:  
-                backspace_count = randint(1, 3)
-                backspace_delay = uniform(1, 1.5)
+            # if random() < 0.02:  
+            #     backspace_count = randint(1, 3)
+            #     backspace_delay = uniform(1, 1.5)
 
-                sleep(backspace_delay)
+            #     sleep(backspace_delay)
 
-                # Save the characters to be backspaced
-                to_backspace = ''
-                for j in range(backspace_count):
-                    to_backspace += message[i-j-1]
+            #     # Save the characters to be backspaced
+            #     to_backspace = ''
+            #     for j in range(backspace_count):
+            #         to_backspace += message[i-j-1]
 
-                # Backspace
-                for j in range(backspace_count):
-                    into.send_keys(Keys.BACKSPACE)
-                    _calculate_type_speed(wpm)
+            #     # Backspace
+            #     for j in range(backspace_count):
+            #         into.send_keys(Keys.BACKSPACE)
+            #         _calculate_type_speed(wpm)
 
-                # Type out the saved characters again
-                for j in to_backspace[::-1]:
-                    into.send_keys(j)
-                    _calculate_type_speed(wpm)
+            #     # Type out the saved characters again
+            #     for j in to_backspace[::-1]:
+            #         into.send_keys(j)
+            #         _calculate_type_speed(wpm)
 
         sleep(uniform(0.5, 1))  
         into.send_keys(Keys.RETURN)
