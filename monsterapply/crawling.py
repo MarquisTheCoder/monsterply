@@ -57,8 +57,8 @@ class Crawler():
     def crawl(self) -> None:
         self.goto_home()
         self.bypass_google_login()
-        self.search_job("Software Developer", "New York")
-        self.load_jobs("Developer", "New York")
+        self.search_job("Software Developer", "wyoming")
+        self.load_jobs("Developer", "wyoming")
 
     def goto_home(self) -> None:
         self.driver.get(base_url)
@@ -132,6 +132,7 @@ class Crawler():
                 print(apply_button.text)
                 self.apply_for_job(apply_button)
 
+        sleep(6000000)
         # next_page = f'https://{self.driver.current_url}jobs/search?q={search.replace(" ", "+")}&where={location}&page={current_page}' 
         # if self.check_page(next_page, current_page + 1):
         #     current_page = current_page + 1
