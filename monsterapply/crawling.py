@@ -70,7 +70,6 @@ class Crawler():
 
         login_with_google: WebElement = wait(Login.google_login, self.driver)
         move_pointer_to_element(login_with_google, self.driver)
-        randomize_pause(0.5, 1.3)
         login_with_google.click()
         
         randomize_pause(1.0, 2.5)
