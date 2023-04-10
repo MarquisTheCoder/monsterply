@@ -1,8 +1,8 @@
 
 
 from mio.actions import *
-import mio.fields
-import mio.wait
+# import mio.fields
+# import mio.wait
 
 from time import sleep
 from datetime import datetime
@@ -14,12 +14,14 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from traversing.paths.types import XPATH
+from traversing.paths.login import Login
 from traversing.paths.home import HomePaths
 from traversing.paths.recommended_jobs import RecommendedPaths
 
 
-from mio.wait import wait
+from mio.wait import *
 from mio.fields import send
+
 
 """Handles exception handling"""
 
@@ -65,6 +67,10 @@ class Crawler():
             
         except Exception:
             """logged in already"""
+
+    def bypass_login(self):
+        login_with_google: WebElement = wait(Login.google_login, self.driver)
+        login_with_google.click()
 
     # @raises_not_found
     def search_job(self, job: str):

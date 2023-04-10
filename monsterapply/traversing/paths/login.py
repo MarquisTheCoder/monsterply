@@ -9,4 +9,6 @@ class Login:
 
     class google:
         email: XPATH = '//*[@id="identifierId"]'
-        
+        next_email: XPATH = '//*[@id="identifierNext"]/div/button' 
+        password: XPATH = '//*[@id="password"]/div[1]/div/div[1]/input'
+        next_password: XPATH = '//*[@id="passwordNext"]/div/button'

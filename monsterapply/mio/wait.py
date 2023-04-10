@@ -1,5 +1,7 @@
 
 
+from time import sleep
+from random import uniform
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
@@ -13,7 +15,7 @@ from selenium.common.exceptions import NoSuchElementException
 def mili_to_seconds(mili: int) -> int:
     return mili * 1_000
 
-def wait(to_find: str, driver: WebDriver,timeout: int = mili_to_seconds(5)):
+def wait(to_find: str, driver: WebDriver,timeout: int = mili_to_seconds(15)):
 
     wait: WebDriverWait = WebDriverWait(driver, timeout)
 
@@ -23,3 +25,9 @@ def wait(to_find: str, driver: WebDriver,timeout: int = mili_to_seconds(5)):
     
     # except Exception:
     #    raise NoSuchElementException
+
+def randomize_pause(method, start: float, end: float) -> None:
+    def page_action(*args, **kwargs):
+        sleep(uniform(start,end))
+        method(*args, **kwargs)
+    return page_action
