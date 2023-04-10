@@ -16,8 +16,9 @@ from itertools import count
 
 driver: WebDriver = new_driver()
 
-async def start_drvier():
+async def start_driver():
     driver.get("https://google.com")
+    await sleep(2)
     wait(HomePaths.home, driver=driver, timeout=100000)
 
 
@@ -28,5 +29,8 @@ async def save_cookies():
 
 
 async def run_both():
-    start_drvier()
+    start_driver()
     save_cookies()
+
+
+asyncio.run(run_both())
