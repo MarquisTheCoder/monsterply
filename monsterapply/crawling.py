@@ -57,8 +57,8 @@ class Crawler():
     def crawl(self) -> None:
         self.goto_home()
         self.bypass_google_login()
-        self.search_job("Junior Java Developer", "Ohio")
-        self.load_jobs("Junior Java Developer", "Ohio")
+        self.search_job("Software Developer", "New York")
+        self.load_jobs("Developer", "New York")
 
     def goto_home(self) -> None:
         self.driver.get(base_url)
@@ -134,11 +134,11 @@ class Crawler():
                 print(apply_button.text)
                 self.apply_for_job(apply_button)
 
-        next_page = f'https://{self.driver.current_url}jobs/search?q={search.replace(" ", "+")}&where={location}&page={current_page}' 
-        if self.check_page(next_page, current_page + 1):
-            current_page = current_page + 1
-            self.driver.get()
-            self.load_jobs(current_page)  
+        # next_page = f'https://{self.driver.current_url}jobs/search?q={search.replace(" ", "+")}&where={location}&page={current_page}' 
+        # if self.check_page(next_page, current_page + 1):
+        #     current_page = current_page + 1
+        #     self.driver.get()
+        #     self.load_jobs(current_page)  
 
     def apply_for_job(self, button: WebElement) -> None:
         button.click()
