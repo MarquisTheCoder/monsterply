@@ -62,14 +62,13 @@ class Crawler():
             login_button: WebElement = wait(HomePaths.login_button, self.driver)
             move_pointer_to_element(self.driver, login_button)
             login_button.click()
-            sleep(60 * 1.3)
             
         except Exception:
             """logged in already"""
 
     # @raises_not_found
     def search_job(self, job: str):
-        search_bar: WebElement = wait(HomePaths.search_bar,self.driver)
+        search_bar: WebElement = wait(HomePaths.search_bar,self.driver, timeout=180)
         send(job, into=search_bar, driver=self.driver)
 
 
