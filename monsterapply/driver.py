@@ -30,6 +30,7 @@ def new_driver() -> WebDriver:
 
     chrome: WebDriver = uc2.Chrome(version_main=111, chrome_options=chrome_options)
     chrome.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})") 
+    chrome.delete_all_cookies()
 
     if (current_system == 'darwin'):
         chrome_options.add_argument(f'user-data-dir=/Users/{getlogin()}/Library/Application Support/Google/Chrome/Default')
