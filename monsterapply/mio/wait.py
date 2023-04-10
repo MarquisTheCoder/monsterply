@@ -20,8 +20,10 @@ def wait(to_find: str, driver: WebDriver,timeout: int = mili_to_seconds(15)):
     timeout = mili_to_seconds(timeout)
     wait: WebDriverWait = WebDriverWait(driver, timeout)
 
+
     # try:
     to_find: WebElement = wait.until(ec.presence_of_element_located((By.XPATH, to_find)))
+    print(f"found element: {to_find}")
     return to_find
     
     # except Exception:
