@@ -4,36 +4,42 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.action_chains import ActionChains
 import scipy.interpolate as si
-from time import sleep
 import numpy as np
 
 
 
 def move_pointer_to_element(element: WebElement, driver: WebDriver):
 
-   # Assume driver is a valid instance of a webdriver
-# Assume element is the WebElement you want to move the mouse to
+    # B-Line Curve base:
+    points = [[0, 0], [0, 2], [2, 3], [4, 0], [6, 3], [8, 2], [8, 0]];
+    points = np.array(points)
 
-# Define the control points for the Bézier curve
-    p0 = element.location
-    p3 = element.location
-    
-    p1 = {'x': p0['x'] + 100, 'y': p0['y'] + 100}
-    p2 = {'x': p3['x'] + 100, 'y': p3['y'] + 100}
+    x = points[:,0]
+    y = points[:,1]
 
-    # Create an instance of ActionChains
-    actions = ActionChains(driver)
 
-    # Calculate the position of the mouse pointer along the curve
-    for t in range(0, 101, 5):
-        x = ((1 - t / 100) ** 3) * p0['x'] + 3 * ((1 - t / 100) ** 2) * (t / 100) * p1['x'] + 3 * (1 - t / 100) * ((t / 100) ** 2) * p2['x'] + ((t / 100) ** 3) * p3['x']
-        y = ((1 - t / 100) ** 3) * p0['y'] + 3 * ((1 - t / 100) ** 2) * (t / 100) * p1['y'] + 3 * (1 - t / 100) * ((t / 100) ** 2) * p2['y'] + ((t / 100) ** 3) * p3['y']
+    t = range(len(points))
+    ipl_t = np.linspace(0.0, len(points) - 1, 100)
 
-        # Move the mouse pointer to the calculated position
-        actions.move_to_element_with_offset(element, x, y)
+    x_tup = si.splrep(t, x, k=3)
+    y_tup = si.splrep(t, y, k=3)
 
-        # Perform the action
-        actions.perform()
+    x_list = list(x_tup)
+    xl = x.tolist()
+    x_list[1] = xl + [0.0, 0.0, 0.0, 0.0]
 
-        # Wait for a short amount of time to simulate human-like movement
-        sleep(0.1)
+    y_list = list(y_tup)
+    yl = y.tolist()
+    y_list[1] = yl + [0.0, 0.0, 0.0, 0.0]
+
+    x_i = si.splev(ipl_t, x_list) # x interpolate values
+    y_i = si.splev(ipl_t, y_list) # y interpolate values
+
+    action = ActionChains(driver)
+    action.move_to_element(element)
+    action.perform()
+
+    for mouse_x, mouse_y in zip(x_i, y_i):
+        action.move_by_offset(mouse_x,mouse_y);
+        action.perform();
+        print(mouse_x, mouse_y)
