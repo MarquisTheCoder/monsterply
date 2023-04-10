@@ -110,9 +110,11 @@ class Crawler():
     def check_next_page(self, job: str, location: str, page: int) -> bool:
         self.driver.get(self.form_query(job, location, page))
         randomize_pause(2,4)
-        if 'Sorry' in self.driver.page_source:
+
+        if 'Sorry, no jobs found for that search' in self.driver.page_source:
             print("last page")
             exit(1)
+
         self.search_jobs(job, location, page)
         
 
