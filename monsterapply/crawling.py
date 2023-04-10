@@ -76,13 +76,11 @@ class Crawler():
 
         email: WebElement = wait(Login.google.email, self.driver)
         move_pointer_to_element(email, self.driver)
-        send('deshawn.m.williams01@gmail.com', email, self.driver)
 
         sleep(1 + uniform(0,1))
         
         password: WebElement = wait(Login.google.password, self.driver)
         move_pointer_to_element(password, self.driver)
-        send('Ciddate0!', password, self.driver)
         
         sleep(1 + uniform(0,1))
 
