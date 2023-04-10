@@ -24,7 +24,7 @@ from exceptions import *
 
 base_url: str = "https://www.monster.com/"
 
-class Crawler:
+class Crawler():
 
     def ___init__(self, 
                   hours: int = 2, 
