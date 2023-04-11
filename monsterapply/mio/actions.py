@@ -14,6 +14,10 @@ def move_pointer_to_element(element: WebElement, driver: WebDriver):
     ActionChains(driver)\
         .move_to_element(element)\
         .perform()
+
+def scroll_within_element(element: WebElement, driver: WebDriver):
+    pass
+
         # get the x and y coordinates of the element
     # x, y = element.location["x"], element.location["y"]
 
