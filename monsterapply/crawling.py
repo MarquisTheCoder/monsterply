@@ -27,6 +27,7 @@ from mio.fields import send
 """Handles exception handling"""
 
 from exceptions import *
+from math import floor
 import requests
 
 base_url: str = "https://www.monster.com/"
@@ -129,8 +130,8 @@ class Crawler():
 
         result_container: WebElement = hold.until(ec.presence_of_element_located((By.ID,"JobCardGrid")))
 
-        window_height: float = self.driver.get_window_size()["height"] 
-        offset: float = window_height / 10
+        window_height: int = self.driver.get_window_size()["height"] 
+        offset: int = floor(window_height * 0.05)
 
         for page in range(current_page):
 
