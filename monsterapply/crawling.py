@@ -56,7 +56,7 @@ class Crawler():
     def crawl(self) -> None:
         self.goto_home()
         self.bypass_google_login()
-        self.search_jobs("Software Developer", "California", 1)
+        self.search_jobs("Web Developer", "Charlotte, NC", 1)
 
 
     def goto_home(self) -> None:
