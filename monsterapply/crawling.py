@@ -127,8 +127,6 @@ class Crawler():
 
         hold: WebDriverWait = WebDriverWait(self.driver, 10000)
 
-        self.driver.execute_script(f'window.scrollTo(0, {self.driver.get_window_size()["height"]})')
-
         result_container: WebElement = hold.until(ec.presence_of_element_located((By.ID,"JobCardGrid")))
 
         scroll_within_element_y(driver=self.driver,
