@@ -123,8 +123,6 @@ class Crawler():
 
 
 
-        
-
 
     def load_jobs(self) -> None: 
 
