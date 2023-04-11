@@ -15,7 +15,7 @@ def move_pointer_to_element(element: WebElement, driver: WebDriver):
         .move_to_element(element)\
         .perform()
 
-def scroll_within_element_y(element: WebElement, driver: WebDriver, y_scroll: int):
+def scroll_within_element_y(element: WebElement, driver: WebDriver, y_scroll: float):
     scroll_origin = ScrollOrigin.from_element(element)
     ActionChains(driver)\
         .scroll_from_origin(scroll_origin, 0, y_scroll)\

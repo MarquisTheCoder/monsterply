@@ -129,8 +129,9 @@ class Crawler():
 
         result_container: WebElement = hold.until(ec.presence_of_element_located((By.ID,"JobCardGrid")))
 
-        window_height: int = self.driver.get_window_size()["height"] 
-        offset: int = window_height / 10
+        window_height: float = self.driver.get_window_size()["height"] 
+        offset: float = window_height / 10
+
         for page in range(current_page):
 
             scroll_within_element_y(driver=self.driver,
