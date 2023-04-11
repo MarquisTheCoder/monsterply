@@ -129,13 +129,15 @@ class Crawler():
 
         result_container: WebElement = hold.until(ec.presence_of_element_located((By.ID,"JobCardGrid")))
 
+        window_height: int = self.driver.get_window_size()["height"] 
+        offset: int = window_height / 10
         for page in range(current_page):
 
             scroll_within_element_y(driver=self.driver,
                                     element=result_container, 
-                                    y_scroll=self.driver.get_window_size()["height"])
+                                    y_scroll=window_height + offset)
 
-            randomize_pause(2,4)
+            randomize_pause(4,5)
 
     def apply_for_job(self, button: WebElement) -> None:
             button.click()
