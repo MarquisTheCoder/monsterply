@@ -129,10 +129,10 @@ class Crawler():
 
         self.driver.execute_script(f'window.scrollTo(0, {self.driver.get_window_size()["height"]})')
 
-        hold.until(ec.presence_of_element_located((By.ID,"JobCardGrid")))
+        result_container: WebElement = hold.until(ec.presence_of_element_located((By.ID,"JobCardGrid")))
 
-        scroll_within_element_y(element=hold, 
-                                driver=self.driver, 
+        scroll_within_element_y(driver=self.driver,
+                                element=result_container, 
                                 y_scroll=self.driver.get_window_size()["height"] * current_page)
 
         randomize_pause(2,3.9)
