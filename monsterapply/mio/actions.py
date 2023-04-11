@@ -10,13 +10,13 @@ from selenium.webdriver.common.action_chains import ActionChains
 #     actions.move_to_element(element).perform()
 
 def move_pointer_to_element(element: WebElement, driver: WebDriver):
-
     ActionChains(driver)\
         .move_to_element(element)\
         .perform()
 
 def scroll_within_element_y(element: WebElement, driver: WebDriver, y_scroll: int):
     ActionChains(driver)\
+        .move_to_element(element)\
         .scroll_by_amount(0, y_scroll)\
         .perform()
 

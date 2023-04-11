@@ -131,9 +131,9 @@ class Crawler():
 
         hold.until(ec.presence_of_element_located((By.ID,"JobCardGrid")))
 
-        move_pointer_to_element(hold, self.driver)
-
-        scroll_within_element_y(hold, self.driver,self.driver.get_window_size()["height"] * current_page)
+        scroll_within_element_y(element=hold, 
+                                driver=self.driver, 
+                                y_scroll=self.driver.get_window_size()["height"] * current_page)
 
         randomize_pause(2,3.9)
 
