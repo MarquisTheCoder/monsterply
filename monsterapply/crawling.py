@@ -103,7 +103,7 @@ class Crawler():
         takeaway_commas: str = takeaway_spaces.replace(",", "%2C")
 
         self.search_job(job, takeaway_commas, page)
-        self.load_jobs()
+        self.load_jobs(page)
         self.apply_for_jobs()
         self.check_next_page(job, location, page + 1)
         
@@ -112,7 +112,6 @@ class Crawler():
         randomize_pause(2,4)
 
         try:
-
             hold: WebDriverWait = WebDriverWait(self.driver, 5)
             hold.until(ec.presence_of_element_located((By.CLASS_NAME,"job-search-resultsstyle__JobCardWrap-sc-1wpt60k-5"))) 
             self.search_jobs(job, location, page)
@@ -124,17 +123,19 @@ class Crawler():
 
 
 
-    def load_jobs(self) -> None: 
+    def load_jobs(self, current_page: int) -> None: 
 
         hold: WebDriverWait = WebDriverWait(self.driver, 10000)
 
         self.driver.execute_script(f'window.scrollTo(0, {self.driver.get_window_size()["height"]})')
 
-        hold.until(ec.presence_of_element_located((By.CLASS_NAME,"apply-buttonstyle__JobApplyButton-sc-1xcccr3-0")))
+        hold.until(ec.presence_of_element_located((By.ID,"JobCardGrid")))
 
-        self.driver.execute_script(f'window.scrollTo(0, {self.driver.get_window_size()["height"]})')
+        move_pointer_to_element(hold, self.driver)
 
-        randomize_pause(4,5)
+        scroll_within_element_y(hold, self.driver,self.driver.get_window_size()["height"] * current_page)
+
+        randomize_pause(2,3.9)
 
     def apply_for_job(self, button: WebElement) -> None:
             button.click()
