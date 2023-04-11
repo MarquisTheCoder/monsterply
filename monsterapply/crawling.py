@@ -111,11 +111,18 @@ class Crawler():
         self.driver.get(self.form_query(job, location, page))
         randomize_pause(2,4)
 
-        if 'Sorry, no jobs found for that search' in self.driver.page_source:
-            print("last page")
+        try:
+
+            hold: WebDriverWait = WebDriverWait(self.driver, 5)
+            hold.until(ec.presence_of_element_located((By.CLASS_NAME,"job-search-resultsstyle__JobCardWrap-sc-1wpt60k-5"))) 
+            self.search_jobs(job, location, page)
+
+        except Exception as e:
+            print('last page found')
             exit(1)
 
-        self.search_jobs(job, location, page)
+
+
         
 
 
