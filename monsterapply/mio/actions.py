@@ -1,10 +1,11 @@
 
 from time import sleep
 from random import uniform
+
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.action_chains import ActionChains
-
+from selenium.webdriver.common.actions.wheel_input import ScrollOrigin
 # def move_pointer_to_element(element: WebElement, driver: WebDriver):
 #     actions = ActionChains(driver)
 #     actions.move_to_element(element).perform()
@@ -15,9 +16,9 @@ def move_pointer_to_element(element: WebElement, driver: WebDriver):
         .perform()
 
 def scroll_within_element_y(element: WebElement, driver: WebDriver, y_scroll: int):
+    scroll_origin = ScrollOrigin.from_element(element)
     ActionChains(driver)\
-        .move_to_element(element)\
-        .scroll_by_amount(0, y_scroll)\
+        .scroll_from_origin(scroll_origin, 0, y_scroll)\
         .perform()
 
         # get the x and y coordinates of the element
